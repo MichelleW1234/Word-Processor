@@ -15,8 +15,8 @@ function Docscreen (){
 
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 && Documents[ActiveDocument] 
-            ? Documents[ActiveDocument] 
-            : []
+            ? Documents[ActiveDocument]
+            : ["", "0"]
         );
 
     const currentDocumentRef = useRef(currentDocument);
@@ -24,6 +24,46 @@ function Docscreen (){
         currentDocumentRef.current = currentDocument;
     }, [currentDocument]);
 
+
+
+    const addText = (character) => {
+
+        const newLetter = character.charCodeAt(0) + ",";
+
+        setCurrentDocument(prev => {
+            const newDoc = [...prev];
+            newDoc[0] = newDoc[0] + newLetter;
+            return newDoc;
+        });
+
+    }
+
+    const deleteText = () => {
+
+        const textLength = currentDocumentRef.current[0].split(",").length - 1;
+
+        if (textLength > 1){
+
+            const lastCommaIndex = currentDocumentRef.current[0].lastIndexOf(",");
+            const secondLastCommaIndex = currentDocumentRef.current[0].lastIndexOf(",", lastCommaIndex - 1);
+
+            setCurrentDocument(prev => {
+                const newDoc = [...prev];
+                newDoc[0] = newDoc[0].slice(0, secondLastCommaIndex + 1);
+                return newDoc;
+            });
+
+        } else {
+
+            setCurrentDocument(prev => {
+                const newDoc = [...prev];
+                newDoc[0] = "";
+                return newDoc;
+            });
+
+        }
+
+    }
 
 
     const saveProgress = () => {
@@ -43,8 +83,7 @@ function Docscreen (){
 
             setDocuments(prev => ({
                 ...prev,
-                [newKey]: 
-                [[1, "H".charCodeAt(0)-65], [1, "E".charCodeAt(0)-65], [1, "L".charCodeAt(0)-65], [1, "L".charCodeAt(0)-65], [1, "O".charCodeAt(0)-65]], //DELETE LATER AND REPLACE WITH  currentDocumentRef.current, !!!!!!
+                [newKey]: currentDocumentRef.current,
             }));
 
         }

@@ -31,33 +31,53 @@ function Document ({currentDocument}){
 
     const upperCase = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z];
     const lowerCase = [];
-    const symbols = [];
     const numbers = [];
+    const symbols = [[], [], []];
+
+    const documentString = currentDocument[0];
+    const documentStyle = currentDocument[1];
 
     return (
 
         <div className = "DocPage">
             <div className = "DocTextContainer">
-                {currentDocument.map((character, index) => (
-                    currentDocument[index][0] === 0 ? (
+                {documentString.split(",").filter(value => value !== "").map((char, index) => {
 
-                        <img className = "DocCharacter" key={index} src = {lowerCase[currentDocument[index][1]]}/>
+                    const asciiValue = Number(char);
 
-                    ) : currentDocument[index][0] === 1 ? (
+                    return (
 
-                        <img className = "DocCharacter" key={index} src = {upperCase[currentDocument[index][1]]}/>
+                        documentStyle.charAt(0) === "0" ? ( /* Plain text (not bold) */
 
-                    ) : currentDocument[index][0] === 2 ? (
+                            97 <= asciiValue && asciiValue <= 122 ? (
 
-                        <img className = "DocCharacter" key={index} src = {numbers[currentDocument[index][1]]}/>
+                                <img className = "DocCharacter" key={index} src = {lowerCase[asciiValue-97]}/>
 
-                    ) : (
+                            ) : 65 <= asciiValue && asciiValue <= 90 ? (
 
-                        <img className = "DocCharacter" key={index} src = {symbols[currentDocument[index][1]]}/>
+                                <img className = "DocCharacter" key={index} src = {upperCase[asciiValue-65]}/>
+
+                            ) : 48 <= asciiValue && asciiValue <= 57 ? (
+
+                                <img className = "DocCharacter" key={index} src = {numbers[asciiValue-48]}/>
+
+                            ) : (
+
+                                //change this to map to exact ascii values (since they're distributed everywhere)
+                                <img className = "DocCharacter" key={index} src = {symbols[asciiValue]}/>
+
+                            )
+
+                        ) : (
+
+                            null
+
+                        )
+
 
                     )
                    
-                ))}
+                })}
             </div>
         </div>
 
