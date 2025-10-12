@@ -13,7 +13,7 @@
 
 }
 
-.HomescreenContainer{
+.HomescreenDocContainer{
 
     display: flex;
     flex-direction: row;
@@ -29,17 +29,47 @@
     height: 20rem;
     width: 15rem;
 
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    padding: 1rem;
+    padding: 2rem 1.5rem;
     gap: 2rem;
 
     background-color: white;
 
 }
+
+.Options {
+
+    position: absolute;
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    left: 0;
+    z-index: 1;
+
+    display: none;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    gap: 1rem;
+
+    background-color: rgba(84, 115, 255, 0.5);
+
+}
+
+.HomeDocPage:hover .Options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
 
 .HomeDocPageNew{
 
@@ -47,7 +77,7 @@
     width: 15rem;
 
     font-size: 8rem;
-    padding: 1rem;
+    padding: 2rem 1.5rem;
 
     background-color: white;
 
@@ -86,3 +116,14 @@
 }
 
 
+.HomeDocTitle{
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
+    white-space: normal;
+
+}

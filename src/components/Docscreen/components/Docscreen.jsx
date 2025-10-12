@@ -16,7 +16,7 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 && Documents[ActiveDocument] 
             ? Documents[ActiveDocument]
-            : ["", "0"]
+            : ["", "85,110,116,105,116,108,101,100,","0"]
         );
 
     const currentDocumentRef = useRef(currentDocument);
