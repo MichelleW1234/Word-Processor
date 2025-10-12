@@ -20,8 +20,16 @@ function Homescreen (){
     const deleteDocument = (keyToRemove) => {
 
         setDocuments(prevDocs => {
-            const { [keyToRemove]: _, ...newDocsList } = prevDocs;
-            return newDocsList;
+            const { [keyToRemove]: _, ...filteredDocsList } = prevDocs;
+
+            const updatedDocsList = Object.fromEntries(
+                Object.entries(filteredDocsList).map(([key, value]) => {
+                    const newKey = key > keyToRemove ? key - 1 : key;
+                    return [newKey, value];
+                })
+            );
+
+            return updatedDocsList;
         });
 
     }
@@ -35,7 +43,7 @@ function Homescreen (){
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
                 {Object.entries(Documents).map(([key, page]) => {
 
-                    const titleAsciiArray = Documents[key][1].split(",");
+                    const titleAsciiArray = Documents[key][2].split(",");
                     const titleStringFull = titleAsciiArray.map(v => String.fromCharCode(Number(v))).join("");
                     const finalTitle = titleStringFull.length > 40 ? titleStringFull.slice(0, 40) + "..." 
                                                                     : titleStringFull;

@@ -16,7 +16,7 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 && Documents[ActiveDocument] 
             ? Documents[ActiveDocument]
-            : ["", "85,110,116,105,116,108,101,100,","0"]
+            : ["", "0", "85,110,116,105,116,108,101,100,", "0"]
         );
 
     const currentDocumentRef = useRef(currentDocument);
@@ -75,7 +75,30 @@ function Docscreen (){
                 [ActiveDocument]: currentDocumentRef.current,
             }));
 
-            setActiveDocument(-1);
+        } else {
+
+            const newKey = Object.keys(Documents).length;
+
+            setDocuments(prev => ({
+                ...prev,
+                [newKey]: currentDocumentRef.current,
+            }));
+
+            setActiveDocument(newKey);
+
+        }
+
+    }
+
+
+    const leaveDocument = () => {
+
+        if (ActiveDocument !== -1){
+
+            setDocuments(prev => ({
+                ...prev,
+                [ActiveDocument]: currentDocumentRef.current,
+            }));
 
         } else {
 
@@ -88,16 +111,22 @@ function Docscreen (){
 
         }
 
+        setActiveDocument(-1);
+
     }
+
 
     return (
 
         <div className = "DocscreenLayout">
-            <Link to="/home" className = "generalbuttonGlitch Enter"  onClick = {() => saveProgress()}> Back </Link>
+            <Link to="/home" className = "generalbuttonGlitch Enter" onClick = {() => leaveDocument()}> Back </Link>
             <Document
                 currentDocument = {currentDocument}
             />
+            <button onClick = {()=> addText("A")}>Add text </button> {/* For testing purposes*/}
+            <button  onClick = {() => saveProgress()}> Save </button>
         </div>
+        
     );
 
 }

@@ -5,8 +5,9 @@ import "./Document.css";
 function Document ({currentDocument}){
 
     const documentString = currentDocument[0];
-    const documentTitle = currentDocument[1];
-    const documentStyle = currentDocument[2];
+    const documentStringStyle = currentDocument[1];
+    const documentTitle = currentDocument[2];
+    const documentTitleStyle = currentDocument[3];
 
     return (
 
@@ -14,14 +15,14 @@ function Document ({currentDocument}){
             <div className = "DocTitle">
                 <DocumentReader
                     stringToParse = {documentTitle}
-                    stringStyle={documentStyle}
+                    stringStyle={documentTitleStyle}
                 />
             </div>
             <hr className = "DocHeaderBreak"/>
             <div className = "DocTextContainer">
                 <DocumentReader
                     stringToParse = {documentString}
-                    stringStyle={documentStyle}
+                    stringStyle={documentStringStyle}
                 />
             </div>
         </div>
