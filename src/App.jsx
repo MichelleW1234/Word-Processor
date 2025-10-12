@@ -11,7 +11,7 @@ function App() {
       <div>
         <HashRouter>
           <Routes>
-            <Route index element={<Docscreen/>}/>
+            <Route index element={<Homescreen/>}/>
             
             <Route path="/home" element={<Homescreen />}/>
             <Route path="/document" element={<Docscreen />}/>
