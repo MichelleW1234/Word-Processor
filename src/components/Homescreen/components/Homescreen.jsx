@@ -11,26 +11,15 @@ function Homescreen (){
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
     
 
-    const goToDocument = (keyToActivate) => {
+    const goToDocument = (indexToActivate) => {
 
-        setActiveDocument(keyToActivate);
+        setActiveDocument(indexToActivate);
 
     }
     
-    const deleteDocument = (keyToRemove) => {
+    const deleteDocument = (indexToRemove) => {
 
-        setDocuments(prevDocs => {
-            const { [keyToRemove]: _, ...filteredDocsList } = prevDocs;
-
-            const updatedDocsList = Object.fromEntries(
-                Object.entries(filteredDocsList).map(([key, value]) => {
-                    const newKey = key > keyToRemove ? key - 1 : key;
-                    return [newKey, value];
-                })
-            );
-
-            return updatedDocsList;
-        });
+        setDocuments(prev => prev.filter((_, i) => i !== indexToRemove));
 
     }
 
@@ -41,19 +30,19 @@ function Homescreen (){
         <div className = "HomescreenLayout">
             <div className = "HomescreenDocContainer">
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
-                {Object.entries(Documents).map(([key, page]) => {
+                {Documents.map((page, index) => {
 
-                    const titleAsciiArray = Documents[key][2].split(",");
+                    const titleAsciiArray = Documents[index][2].split(",");
                     const titleStringFull = titleAsciiArray.map(v => String.fromCharCode(Number(v))).join("");
                     const finalTitle = titleStringFull.length > 40 ? titleStringFull.slice(0, 40) + "..." 
                                                                     : titleStringFull;
                                     
                     return (
-                        <div className = "HomeDocPage" key={key}>
+                        <div className = "HomeDocPage" key={index}>
                             <div className = "HomeDocTitle">{finalTitle}</div>
                             <div className = "Options">
-                                <Link to="/document" className = "HomeDocButton" onClick = {() => goToDocument(key)}> Go to Document</Link>
-                                <button className = "HomeDocButton" onClick = {() => deleteDocument(key)}> Delete this Document </button>
+                                <Link to="/document" className = "HomeDocButton" onClick = {() => goToDocument(index)}> Go to Document</Link>
+                                <button className = "HomeDocButton" onClick = {() => deleteDocument(index)}> Delete this Document </button>
                             </div>
                         </div>
                     )

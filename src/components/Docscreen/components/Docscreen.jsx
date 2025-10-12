@@ -14,7 +14,7 @@ function Docscreen (){
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
 
     const [currentDocument, setCurrentDocument] = useState(
-        ActiveDocument !== -1 && Documents[ActiveDocument] 
+        ActiveDocument !== -1 
             ? Documents[ActiveDocument]
             : ["", "0", "85,110,116,105,116,108,101,100,", "0"]
         );
@@ -70,21 +70,19 @@ function Docscreen (){
 
         if (ActiveDocument !== -1){
 
-            setDocuments(prev => ({
-                ...prev,
-                [ActiveDocument]: currentDocumentRef.current,
-            }));
+            setDocuments(prev => {
+                const newDocs = [...prev];
+                newDocs[ActiveDocument] = currentDocumentRef.current;
+                return newDocs;
+            });
 
         } else {
 
-            const newKey = Object.keys(Documents).length;
+            const newIndex = Documents.length;
 
-            setDocuments(prev => ({
-                ...prev,
-                [newKey]: currentDocumentRef.current,
-            }));
+            setDocuments(prev => [...prev, currentDocumentRef.current]);
 
-            setActiveDocument(newKey);
+            setActiveDocument(newIndex);
 
         }
 
@@ -95,19 +93,15 @@ function Docscreen (){
 
         if (ActiveDocument !== -1){
 
-            setDocuments(prev => ({
-                ...prev,
-                [ActiveDocument]: currentDocumentRef.current,
-            }));
+            setDocuments(prev => {
+                const newDocs = [...prev];
+                newDocs[ActiveDocument] = currentDocumentRef.current;
+                return newDocs;
+            });
 
         } else {
 
-            const newKey = Object.keys(Documents).length;
-
-            setDocuments(prev => ({
-                ...prev,
-                [newKey]: currentDocumentRef.current,
-            }));
+            setDocuments(prev => [...prev, currentDocumentRef.current]);
 
         }
 

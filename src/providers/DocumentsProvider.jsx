@@ -10,11 +10,9 @@ export function DocumentsProvider({ children }) {
   const [Documents, setDocuments] = useState(() => {
     try {
       const stored = JSON.parse(localStorage.getItem("Documents"));
-      return stored && typeof stored === "object" && !Array.isArray(stored)
-        ? stored
-        : {};
+      return Array.isArray(stored) ? stored : [];
     } catch {
-      return {};
+      return [];
     }
   });
 
