@@ -4,3 +4,18 @@
     padding: 0.1rem;
 
 }
+
+.cursor {
+
+  display: inline-block;
+  width: 0.3rem;
+  height: 2rem;
+  background-color: rgb(119, 0, 255);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

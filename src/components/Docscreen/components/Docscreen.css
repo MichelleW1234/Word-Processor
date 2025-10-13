@@ -3,13 +3,14 @@
     height: 100vh;
     width: 100vw;
 
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
 
     padding: 5rem;
 
-    background-color: rgb(107, 186, 255);
+    background-color: rgb(192, 148, 240);
 
 }
-

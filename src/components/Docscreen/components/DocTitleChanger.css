@@ -1,0 +1,33 @@
+.DocTitleChangerFloatingFlag{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+
+    gap: 3rem;
+
+    z-index: 1;
+
+    top: 0;
+    left: 0;
+    right: 0;  
+    bottom: 0; 
+
+    background-color: rgba(0, 47, 255, 0.5);
+
+}
+
+.DocTitleChangerBox{
+
+    padding: 5rem;
+    background-color: rgb(248, 192, 255);
+
+}
+
+.DocTitleChangerText{
+
+    background-color: white;
+
+}

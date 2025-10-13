@@ -1,30 +1,32 @@
 import DocumentReader from "./DocumentReader.jsx";
+import TitleReader from "./TitleReader.jsx";
 
 import "./Document.css";
 
-function Document ({currentDocument}){
-
-    const documentString = currentDocument[0];
-    const documentStringStyle = currentDocument[1];
-    const documentTitle = currentDocument[2];
-    const documentTitleStyle = currentDocument[3];
+function Document ({setOpenTitleFlag, currentDocument, setCurrentDocument, cursorLocation, setCursorLocation}){
 
     return (
 
-        <div className = "DocPage">
-            <div className = "DocTitle">
-                <DocumentReader
-                    stringToParse = {documentTitle}
-                    stringStyle={documentTitleStyle}
-                />
+        <div className = "DocComponentsContainer">
+            <div className = "DocTitleContainer">
+                <div className = "DocTitle">
+                    <TitleReader
+                        currentDocument={currentDocument}
+                    />
+                </div>
+                <button onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
             </div>
-            <hr className = "DocHeaderBreak"/>
+
+        <div className = "DocPage">
             <div className = "DocTextContainer">
                 <DocumentReader
-                    stringToParse = {documentString}
-                    stringStyle={documentStringStyle}
+                    currentDocument={currentDocument}
+                    setCurrentDocument={setCurrentDocument}
+                    cursorLocation = {cursorLocation}
+                    setCursorLocation = {setCursorLocation}
                 />
             </div>
+        </div>
         </div>
 
     );

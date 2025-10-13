@@ -1,8 +1,12 @@
 import {useState, useRef, useEffect} from "react";
 import { Link } from 'react-router-dom';
 
+import DocTitleChanger from "./DocTitleChanger.jsx";
+
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
+
+import { cursorLocationChange } from "../helpers/Helpers.js";
 
 import Document from "./Document.jsx";
 
@@ -13,10 +17,13 @@ function Docscreen (){
     const {Documents, setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
 
+    const [cursorLocation, setCursorLocation] = useState(0);
+    const [openTitleFlag, setOpenTitleFlag] = useState(false);
+
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["", "0", "85,110,116,105,116,108,101,100,", "0"]
+            : ["cur,", "0", "85,110,116,105,116,108,101,100,", "0"]
         );
 
     const currentDocumentRef = useRef(currentDocument);
@@ -25,53 +32,51 @@ function Docscreen (){
     }, [currentDocument]);
 
 
-
     const addText = (character) => {
 
-        const newLetter = character.charCodeAt(0) + ",";
+        let copyDoc = [...currentDocumentRef.current];
+        const newLetter = character.charCodeAt(0);
 
-        setCurrentDocument(prev => {
-            const newDoc = [...prev];
-            newDoc[0] = newDoc[0] + newLetter;
-            return newDoc;
-        });
+        let copyDocArray = copyDoc[0].split(","); 
+        copyDocArray.splice(cursorLocation, 0, newLetter);
+        let newCopyDoc = copyDocArray.join(",");
+
+        let finalDoc = [...currentDocumentRef.current];
+        finalDoc[0] = newCopyDoc;
+        
+        setCurrentDocument(finalDoc);
+
+        cursorLocationChange(cursorLocation+1, finalDoc, setCurrentDocument, setCursorLocation);
 
     }
 
     const deleteText = () => {
 
-        const textLength = currentDocumentRef.current[0].split(",").length - 1;
+        if (cursorLocation > 0){
 
-        if (textLength > 1){
+            let copyDoc = [...currentDocumentRef.current];
 
-            const lastCommaIndex = currentDocumentRef.current[0].lastIndexOf(",");
-            const secondLastCommaIndex = currentDocumentRef.current[0].lastIndexOf(",", lastCommaIndex - 1);
+            let copyDocArray = copyDoc[0].split(","); 
+            copyDocArray.splice(cursorLocation-1, 1);
+            let newCopyDoc = copyDocArray.join(",");
 
-            setCurrentDocument(prev => {
-                const newDoc = [...prev];
-                newDoc[0] = newDoc[0].slice(0, secondLastCommaIndex + 1);
-                return newDoc;
-            });
+            let finalDoc = [...currentDocumentRef.current];
+            finalDoc[0] = newCopyDoc;
 
-        } else {
+            setCurrentDocument(finalDoc);
 
-            setCurrentDocument(prev => {
-                const newDoc = [...prev];
-                newDoc[0] = "";
-                return newDoc;
-            });
+            cursorLocationChange(cursorLocation-1, finalDoc, setCurrentDocument, setCursorLocation);
 
         }
 
     }
-
 
     const saveProgress = () => {
 
         if (ActiveDocument !== -1){
 
             setDocuments(prev => {
-                const newDocs = [...prev];
+                let newDocs = [...prev];
                 newDocs[ActiveDocument] = currentDocumentRef.current;
                 return newDocs;
             });
@@ -94,7 +99,7 @@ function Docscreen (){
         if (ActiveDocument !== -1){
 
             setDocuments(prev => {
-                const newDocs = [...prev];
+                let newDocs = [...prev];
                 newDocs[ActiveDocument] = currentDocumentRef.current;
                 return newDocs;
             });
@@ -113,11 +118,23 @@ function Docscreen (){
     return (
 
         <div className = "DocscreenLayout">
+
+            {openTitleFlag === true && 
+            <DocTitleChanger
+                setOpenTitleFlag = {setOpenTitleFlag}
+                setCurrentDocument = {setCurrentDocument}
+            />}
+
             <Link to="/home" className = "generalbuttonGlitch Enter" onClick = {() => leaveDocument()}> Back </Link>
             <Document
+                setOpenTitleFlag = {setOpenTitleFlag}
                 currentDocument = {currentDocument}
+                setCurrentDocument = {setCurrentDocument}
+                cursorLocation={cursorLocation}
+                setCursorLocation = {setCursorLocation}
             />
             <button onClick = {()=> addText("A")}>Add text </button> {/* For testing purposes*/}
+            <button onClick = {()=> deleteText()}>Delete text </button> {/* For testing purposes*/}
             <button  onClick = {() => saveProgress()}> Save </button>
         </div>
         

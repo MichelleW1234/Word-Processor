@@ -9,7 +9,7 @@
 
     padding: 10rem;
 
-    background-color: rgb(107, 186, 255);
+    background-color: rgb(201, 107, 255);
 
 }
 
@@ -37,13 +37,14 @@
     justify-content: center;
 
     padding: 2rem 1.5rem;
-    gap: 2rem;
 
-    background-color: white;
+    background-color: rgb(187, 231, 255);
 
 }
 
 .Options {
+
+    display: none;
 
     position: absolute;
     top: 0; 
@@ -52,11 +53,7 @@
     left: 0;
     z-index: 1;
 
-    display: none;
-
-    font-size: 1.5rem;
-    font-weight: bold;
-    gap: 1rem;
+    gap: 3rem;
 
     background-color: rgba(84, 115, 255, 0.5);
 
@@ -79,20 +76,20 @@
     font-size: 8rem;
     padding: 2rem 1.5rem;
 
-    background-color: white;
+    background-color: rgb(187, 231, 255);
 
 }
 
 .HomeDocPageNew:hover{
 
     color: white;
-    background-color: rgb(97, 0, 225);
+    background-color: rgb(135, 0, 225);
 
 }
 
 .HomeDocButton{
 
-    font-size: 1rem;
+    font-size: 1.1rem;
     background-color: rgb(0, 213, 255);
     padding: 0.5rem 0.8rem;
 
