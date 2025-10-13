@@ -24,15 +24,10 @@ function Docscreen (){
             : ["|", "0", "Untitled", "0"]
         );
 
-    const currentDocumentRef = useRef(currentDocument);
-    useEffect(() => {
-        currentDocumentRef.current = currentDocument;
-    }, [currentDocument]);
-
 
     const addText = (character) => {
 
-        let copyDoc = currentDocumentRef.current[0];
+        let copyDoc = currentDocument[0];
         let copyDocArray = copyDoc.split("");
 
         const newCopyDocArray = [
@@ -57,7 +52,7 @@ function Docscreen (){
 
         if (cursorLocation > 0){
 
-            let copyDoc = currentDocumentRef.current[0];
+            let copyDoc = currentDocument[0];
             let copyDocArray = copyDoc.split("");
 
             const removedDocArray = [
@@ -85,7 +80,7 @@ function Docscreen (){
 
             setDocuments(prev => {
                 let newDocs = [...prev];
-                newDocs[ActiveDocument] = currentDocumentRef.current;
+                newDocs[ActiveDocument] = currentDocument;
                 return newDocs;
             });
 
@@ -93,7 +88,7 @@ function Docscreen (){
 
             const newIndex = Documents.length;
 
-            setDocuments(prev => [...prev, currentDocumentRef.current]);
+            setDocuments(prev => [...prev, currentDocument]);
 
             setActiveDocument(newIndex);
 
@@ -108,13 +103,13 @@ function Docscreen (){
 
             setDocuments(prev => {
                 let newDocs = [...prev];
-                newDocs[ActiveDocument] = currentDocumentRef.current;
+                newDocs[ActiveDocument] = currentDocument;
                 return newDocs;
             });
 
         } else {
 
-            setDocuments(prev => [...prev, currentDocumentRef.current]);
+            setDocuments(prev => [...prev, currentDocument]);
 
         }
 

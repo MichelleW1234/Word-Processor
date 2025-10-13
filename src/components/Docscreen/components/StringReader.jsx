@@ -57,14 +57,14 @@ import Z from "../../../images/PixelFontUpperCase/Z.svg";
 import "./DocumentReader.css";
 
 
-function DocumentReader ({currentDocument, setCurrentDocument, cursorLocation, setCursorLocation}){
+function StringReader ({indiciesToParse, currentDocument, setCurrentDocument, cursorLocation, setCursorLocation}){
 
-    const stringToParse = currentDocument[0];
-    const stringStyle = currentDocument[1];
+    const stringToParse = currentDocument[indiciesToParse[0]];
+    const stringStyle = currentDocument[indiciesToParse[1]];
 
     const cursorClickChange = (newLocationIndex) => {
 
-        let docArray = currentDocument[0].split(""); 
+        let docArray = currentDocument[indiciesToParse[0]].split(""); 
 
         const filteredDocArray = docArray.filter(el => el !== "|");
 
@@ -78,7 +78,7 @@ function DocumentReader ({currentDocument, setCurrentDocument, cursorLocation, s
 
         setCurrentDocument(prev => {
             let newDocs = [...prev];
-            newDocs[0] = newCursorDoc;
+            newDocs[indiciesToParse[0]] = newCursorDoc;
             return newDocs;
         });
 
@@ -119,4 +119,4 @@ function DocumentReader ({currentDocument, setCurrentDocument, cursorLocation, s
 }
 
 
-export default DocumentReader;
+export default StringReader;

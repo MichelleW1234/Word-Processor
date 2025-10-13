@@ -1,3 +1,4 @@
+/*
 import a from "../../../images/PixelFontLowerCase/a.svg";
 import b from "../../../images/PixelFontLowerCase/b.svg";
 import c from "../../../images/PixelFontLowerCase/c.svg";
@@ -51,6 +52,7 @@ import W from "../../../images/PixelFontUpperCase/W.svg";
 import X from "../../../images/PixelFontUpperCase/X.svg";
 import Y from "../../../images/PixelFontUpperCase/Y.svg";
 import Z from "../../../images/PixelFontUpperCase/Z.svg";
+*/
 
 
 import "./DocumentReader.css";
