@@ -52,50 +52,25 @@ import X from "../../../images/PixelFontUpperCase/X.svg";
 import Y from "../../../images/PixelFontUpperCase/Y.svg";
 import Z from "../../../images/PixelFontUpperCase/Z.svg";
 
+
 import "./DocumentReader.css";
 
 
 function TitleReader ({currentDocument}){
 
-    const upperCase = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z];
-    const lowerCase = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z];
-    const numbers = [];
-    const symbols = [[], [], []];
-
     const stringToParse = currentDocument[2];
     const stringStyle = currentDocument[3];
-
 
     return (
 
         <>
             {stringToParse.split(",").filter(value => value !== "").map((char, index) => {
 
-                const asciiValue = Number(char);
-
                 return (
 
                     stringStyle.charAt(0) === "0" ? ( /* Plain text (not bold) */
 
-                        97 <= asciiValue && asciiValue <= 122 ? (
-
-                            <img className = "DocCharacter" key={index} src = {lowerCase[asciiValue-97]}/>
-
-                        ) : 65 <= asciiValue && asciiValue <= 90 ? (
-
-                            <img className = "DocCharacter" key={index} src = {upperCase[asciiValue-65]}/>
-                            
-
-                        ) : 48 <= asciiValue && asciiValue <= 57 ? (
-
-                            <img className = "DocCharacter" key={index} src = {numbers[asciiValue-48]}/>
-
-                        ) : (
-
-                            //change this to map to exact ascii values (since they're distributed everywhere)
-                            <img className = "DocCharacter" key={index} src = {symbols[asciiValue]}/>
-
-                        )
+                        <div className = "DocCharacter" key = {index}> {char}</div>
 
                     ) : (
 

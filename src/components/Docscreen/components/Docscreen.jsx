@@ -6,8 +6,6 @@ import DocTitleChanger from "./DocTitleChanger.jsx";
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
-import { cursorLocationChange } from "../helpers/Helpers.js";
-
 import Document from "./Document.jsx";
 
 import "./Docscreen.css";
@@ -23,7 +21,7 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["cur,", "0", "85,110,116,105,116,108,101,100,", "0"]
+            : ["|", "0", "Untitled", "0"]
         );
 
     const currentDocumentRef = useRef(currentDocument);
@@ -34,19 +32,24 @@ function Docscreen (){
 
     const addText = (character) => {
 
-        let copyDoc = [...currentDocumentRef.current];
-        const newLetter = character.charCodeAt(0);
+        let copyDoc = currentDocumentRef.current[0];
+        let copyDocArray = copyDoc.split("");
 
-        let copyDocArray = copyDoc[0].split(","); 
-        copyDocArray.splice(cursorLocation, 0, newLetter);
-        let newCopyDoc = copyDocArray.join(",");
+        const newCopyDocArray = [
+            ...copyDocArray.slice(0, cursorLocation),
+            character,
+            ...copyDocArray.slice(cursorLocation)
+        ];
 
-        let finalDoc = [...currentDocumentRef.current];
-        finalDoc[0] = newCopyDoc;
+        let newCopyDoc = newCopyDocArray.join("");
+
+        setCurrentDocument(prev => {
+            let newDocInfo = [...prev];
+            newDocInfo[0] = newCopyDoc;
+            return newDocInfo;
+        });
         
-        setCurrentDocument(finalDoc);
-
-        cursorLocationChange(cursorLocation+1, finalDoc, setCurrentDocument, setCursorLocation);
+        setCursorLocation(prev => prev + 1);
 
     }
 
@@ -54,18 +57,23 @@ function Docscreen (){
 
         if (cursorLocation > 0){
 
-            let copyDoc = [...currentDocumentRef.current];
+            let copyDoc = currentDocumentRef.current[0];
+            let copyDocArray = copyDoc.split("");
 
-            let copyDocArray = copyDoc[0].split(","); 
-            copyDocArray.splice(cursorLocation-1, 1);
-            let newCopyDoc = copyDocArray.join(",");
+            const removedDocArray = [
+                ...copyDocArray.slice(0, cursorLocation-1),
+                ...copyDocArray.slice(cursorLocation)
+            ];
 
-            let finalDoc = [...currentDocumentRef.current];
-            finalDoc[0] = newCopyDoc;
+            let newCopyDoc = removedDocArray.join("");
 
-            setCurrentDocument(finalDoc);
-
-            cursorLocationChange(cursorLocation-1, finalDoc, setCurrentDocument, setCursorLocation);
+                setCurrentDocument(prev => {
+                let newDocInfo = [...prev];
+                newDocInfo[0] = newCopyDoc;
+                return newDocInfo;
+            });
+            
+            setCursorLocation(prev => prev - 1);
 
         }
 

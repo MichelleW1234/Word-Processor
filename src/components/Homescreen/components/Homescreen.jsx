@@ -32,10 +32,8 @@ function Homescreen (){
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
                 {Documents.map((page, index) => {
 
-                    const titleAsciiArray = Documents[index][2].split(",");
-                    const titleStringFull = titleAsciiArray.map(v => String.fromCharCode(Number(v))).join("");
-                    const finalTitle = titleStringFull.length > 40 ? titleStringFull.slice(0, 40) + "..." 
-                                                                    : titleStringFull;
+                    const finalTitle = Documents[index][2].length > 40 ? Documents[index][2].slice(0, 40) + "..." 
+                                                                    : Documents[index][2];
                                     
                     return (
                         <div className = "HomeDocPage" key={index}>

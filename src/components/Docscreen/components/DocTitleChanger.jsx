@@ -11,32 +11,22 @@ function DocTitleChanger ({setOpenTitleFlag, setCurrentDocument}){
         if (newTitle === ""){
 
             setCurrentDocument(prev => {
-                let newDoc = [...prev];
-                newDoc[2]="85,110,116,105,116,108,101,100,";
-                return newDoc;
+                let newDocs = [...prev];
+                newDocs[2]="Untitled";
+                return newDocs;
             })
 
         } else {
 
-            let asciiArray = []
-
-            for (let i =0; i<newTitle.length; i++){
-
-                asciiArray.push(newTitle.charCodeAt(i));
-
-            }
-            console.log(asciiArray)
-
             setCurrentDocument( prev => {
-                let newDoc = [...prev];
-                newDoc[2]= asciiArray.join(",");
-                return newDoc;
+                let newDocs = [...prev];
+                newDocs[2]= newTitle;
+                return newDocs;
             });
 
         }
 
         setOpenTitleFlag(false);
-
 
     }
 

@@ -18,14 +18,12 @@ function Document ({setOpenTitleFlag, currentDocument, setCurrentDocument, curso
             </div>
 
         <div className = "DocPage">
-            <div className = "DocTextContainer">
                 <DocumentReader
                     currentDocument={currentDocument}
                     setCurrentDocument={setCurrentDocument}
                     cursorLocation = {cursorLocation}
                     setCursorLocation = {setCursorLocation}
                 />
-            </div>
         </div>
         </div>
 

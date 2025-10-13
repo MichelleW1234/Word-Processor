@@ -1,5 +1,3 @@
-import { cursorLocationChange } from "../helpers/Helpers";
-
 import a from "../../../images/PixelFontLowerCase/a.svg";
 import b from "../../../images/PixelFontLowerCase/b.svg";
 import c from "../../../images/PixelFontLowerCase/c.svg";
@@ -57,26 +55,43 @@ import Z from "../../../images/PixelFontUpperCase/Z.svg";
 import "./DocumentReader.css";
 
 
-function DocumentReader ({currentDocument, setCurrentDocument, setCursorLocation}){
-
-    const upperCase = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z];
-    const lowerCase = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z];
-    const numbers = [];
-    const symbols = [[], [], []];
+function DocumentReader ({currentDocument, setCurrentDocument, cursorLocation, setCursorLocation}){
 
     const stringToParse = currentDocument[0];
     const stringStyle = currentDocument[1];
 
+    const cursorClickChange = (newLocationIndex) => {
+
+        let docArray = currentDocument[0].split(""); 
+
+        const filteredDocArray = docArray.filter(el => el !== "|");
+
+        const splitArr = [
+            ...filteredDocArray.slice(0, newLocationIndex),
+            "|",
+            ...filteredDocArray.slice(newLocationIndex)
+        ];
+
+        let newCursorDoc = splitArr.join("");
+
+        setCurrentDocument(prev => {
+            let newDocs = [...prev];
+            newDocs[0] = newCursorDoc;
+            return newDocs;
+        });
+
+        setCursorLocation(newLocationIndex);
+
+    }
+
     return (
 
-        <>
-            {stringToParse.split(",").filter(value => value !== "").map((char, index) => {
-
-                const asciiValue = Number(char);
+        <div>
+            {stringToParse.split("").filter(value => value !== "").map((char, index) => {
 
                 return (
 
-                    char === "cur" ? (
+                    index === cursorLocation && char === "|" ? (
 
                         <span className="cursor" key={index}></span>
 
@@ -84,25 +99,7 @@ function DocumentReader ({currentDocument, setCurrentDocument, setCursorLocation
 
                         stringStyle.charAt(0) === "0" ? ( /* Plain text (not bold) */
 
-                            97 <= asciiValue && asciiValue <= 122 ? (
-
-                                <img className = "DocCharacter" key={index} src = {lowerCase[asciiValue-97]} onClick = {() => cursorLocationChange(index, currentDocument, setCurrentDocument, setCursorLocation)}/>
-
-                            ) : 65 <= asciiValue && asciiValue <= 90 ? (
-
-                                <img className = "DocCharacter" key={index} src = {upperCase[asciiValue-65]} onClick = {() => cursorLocationChange(index, currentDocument, setCurrentDocument, setCursorLocation)}/>
-                                
-
-                            ) : 48 <= asciiValue && asciiValue <= 57 ? (
-
-                                <img className = "DocCharacter" key={index} src = {numbers[asciiValue-48]} onClick = {() => cursorLocationChange(index, currentDocument, setCurrentDocument, setCursorLocation)}/>
-
-                            ) : (
-
-                                //change this to map to exact ascii values (since they're distributed everywhere)
-                                <img className = "DocCharacter" key={index} src = {symbols[asciiValue]} onClick = {() => cursorLocationChange(index, currentDocument, setCurrentDocument, setCursorLocation)}/>
-
-                            )
+                            <div className = "DocCharacter" key = {index} onClick = {() => cursorClickChange(index)}> {char}</div>
 
                         ) : (
 
@@ -114,7 +111,7 @@ function DocumentReader ({currentDocument, setCurrentDocument, setCursorLocation
                 )
                 
             })}
-        </>
+        </div>
 
     );
 }
