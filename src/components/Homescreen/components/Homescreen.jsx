@@ -32,15 +32,15 @@ function Homescreen (){
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
                 {Documents.map((page, index) => {
 
-                    const finalTitle = Documents[index][2].length > 20 ? Documents[index][2].slice(0, 20) + "..." 
+                    const finalTitle = Documents[index][2].length > 30 ? Documents[index][2].slice(0, 30) + "..." 
                                                                     : Documents[index][2];
                                     
                     return (
                         <div className = "HomeDocPage" key={index}>
-                            <div className = "HomeDocTitle">{finalTitle}</div>
+                            <h1 className = "HomeDocTitle">{finalTitle}</h1>
                             <div className = "Options">
                                 <Link to="/document" className = "HomeDocButton" onClick = {() => goToDocument(index)}> Go to Document</Link>
-                                <button className = "HomeDocButton" onClick = {() => deleteDocument(index)}> Delete this Document </button>
+                                <button className = "HomeDocButton" onClick = {() => deleteDocument(index)}> Delete </button>
                             </div>
                         </div>
                     )

@@ -1,12 +1,26 @@
-import {useState} from "react";
+import {useState, useRef} from "react";
+import ContentEditable from "react-contenteditable";
 
 import "./DocTitleChanger.css";
 
-function DocTitleChanger ({setOpenTitleFlag, setCurrentDocument}){
+function DocTitleChanger ({setOpenTitleFlag, currentDocument, setCurrentDocument}){
 
-    const [newTitle, setNewTitle] = useState("");
-    const [error, setError] = useState("Please shorten your title to 40 letters max.");
+    const errorMessage = "Please shorten your title to 40 letters max.";
+
+    const [newTitle, setNewTitle] = useState(currentDocument[2]);
     const [errorFlag, setErrorFlag] = useState(false);
+
+    
+    const editableRef = useRef();
+    const handleChange = (evt) => {
+        const newText = evt.target.value;
+        const unformattedText = newText.replace(/<[^>]+>/g, "");
+
+        // Uses non-html formatted text:
+        setNewTitle(unformattedText);
+    };
+
+
 
     const processNewTitle = () => {
 
@@ -47,16 +61,19 @@ function DocTitleChanger ({setOpenTitleFlag, setCurrentDocument}){
         <div className = "DocTitleChangerFloatingFlag">
 
             <div className = "DocTitleChangerBox">
-                Enter your new title below:
+                <h3>Enter your new title below:</h3>
 
-                <div className = "DocTitleChangerText"
-                    contentEditable={true}
-                    onInput={(e) => setNewTitle(e.currentTarget.textContent)}>
-                </div>
+                <ContentEditable
+                    innerRef={editableRef}
+                    html={newTitle}
+                    onChange={handleChange}
+                    tagName="div"
+                    className="DocTitleChangerText"
+                />
 
-                <button onClick = {() => processNewTitle()}> Done </button>
+                <button className = "DocTitleChangerButton" onClick = {() => processNewTitle()}> Done </button>
 
-                {errorFlag && error}
+                {errorFlag && errorMessage}
 
             </div>
         </div>
