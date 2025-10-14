@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
+import HomeNavBar from "./HomeNavbar.jsx";
+
 import "./Homescreen.css";
 
 function Homescreen (){
 
     const {Documents, setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
-    
 
     const goToDocument = (indexToActivate) => {
 
@@ -27,7 +28,10 @@ function Homescreen (){
 
     return (
 
+        <>
+        <HomeNavBar/>
         <div className = "HomescreenLayout">
+    
             <div className = "HomescreenDocContainer">
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
                 {Documents.map((page, index) => {
@@ -47,6 +51,7 @@ function Homescreen (){
                 })}
             </div>
         </div>
+        </>
 
     );
 
