@@ -21,58 +21,9 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["|", "0", "Untitled", "0"]
+            : ["", "0", "Untitled", "0"]
         );
 
-
-    const addText = (character) => {
-
-        let copyDoc = currentDocument[0];
-        let copyDocArray = copyDoc.split("");
-
-        const newCopyDocArray = [
-            ...copyDocArray.slice(0, cursorLocation),
-            character,
-            ...copyDocArray.slice(cursorLocation)
-        ];
-
-        let newCopyDoc = newCopyDocArray.join("");
-
-        setCurrentDocument(prev => {
-            let newDocInfo = [...prev];
-            newDocInfo[0] = newCopyDoc;
-            return newDocInfo;
-        });
-        
-        setCursorLocation(prev => prev + 1);
-
-    }
-
-    const deleteText = () => {
-
-        if (cursorLocation > 0){
-
-            let copyDoc = currentDocument[0];
-            let copyDocArray = copyDoc.split("");
-
-            const removedDocArray = [
-                ...copyDocArray.slice(0, cursorLocation-1),
-                ...copyDocArray.slice(cursorLocation)
-            ];
-
-            let newCopyDoc = removedDocArray.join("");
-
-                setCurrentDocument(prev => {
-                let newDocInfo = [...prev];
-                newDocInfo[0] = newCopyDoc;
-                return newDocInfo;
-            });
-            
-            setCursorLocation(prev => prev - 1);
-
-        }
-
-    }
 
     const saveProgress = () => {
 
@@ -133,11 +84,7 @@ function Docscreen (){
                 setOpenTitleFlag = {setOpenTitleFlag}
                 currentDocument = {currentDocument}
                 setCurrentDocument = {setCurrentDocument}
-                cursorLocation={cursorLocation}
-                setCursorLocation = {setCursorLocation}
             />
-            <button onClick = {()=> addText("A")}>Add text </button> {/* For testing purposes*/}
-            <button onClick = {()=> deleteText()}>Delete text </button> {/* For testing purposes*/}
             <button  onClick = {() => saveProgress()}> Save </button>
         </div>
         

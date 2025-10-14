@@ -22,12 +22,26 @@
 .DocTitleChangerBox{
 
     padding: 5rem;
+
     background-color: rgb(248, 192, 255);
+
+    border-left: 0.6rem solid black;
+    border-bottom: 0.6rem solid black;
+    border-right: 0.2rem solid black;
+    border-top: 0.2rem solid black;
 
 }
 
 .DocTitleChangerText{
 
+    height: 10rem;
+    width: 20rem;
+
+    overflow-y: auto;
+
+    font-size: 1.5rem;
+
+    padding: 1rem 2rem;
     background-color: white;
 
 }

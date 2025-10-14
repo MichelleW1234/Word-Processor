@@ -32,7 +32,7 @@ function Homescreen (){
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
                 {Documents.map((page, index) => {
 
-                    const finalTitle = Documents[index][2].length > 40 ? Documents[index][2].slice(0, 40) + "..." 
+                    const finalTitle = Documents[index][2].length > 20 ? Documents[index][2].slice(0, 20) + "..." 
                                                                     : Documents[index][2];
                                     
                     return (

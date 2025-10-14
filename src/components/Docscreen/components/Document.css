@@ -22,29 +22,41 @@
 
   width: 60vw;
 
+  font-size: 2rem;
+
   text-align: center;
 
   padding: 1.5rem 2rem;
+
+  border-left: 0.4rem solid black;
+  border-bottom: 0.4rem solid black;
+  border-right: 0.15rem solid black;
+  border-top: 0.15rem solid black;
 
   background-color: rgb(194, 224, 255);
 
 }
 
-.DocPage{
+
+.DocPaper{
 
   width: 60vw;
   height: 40rem;
+
+  overflow-y: auto;
+
+  font-size: 1.5rem;
 
   padding-left: 3.5rem;
   padding-right: 3.5rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
 
-  display: flex;
-  flex-direction: row;
-  overflow-y: auto;
-  flex-wrap: wrap;
-
+  border-left: 0.6rem solid black;
+  border-bottom: 0.6rem solid black;
+  border-right: 0.2rem solid black;
+  border-top: 0.2rem solid black;
+  
   background-color: rgb(194, 224, 255);
 
 }
