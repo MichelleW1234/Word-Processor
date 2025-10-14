@@ -56,48 +56,46 @@ function HomeNavBar (){
 
     }
 
-    
+
     return (
 
         <>
-        <div className = "HomeNavBarContainer">
+            <div className = "HomeNavBarContainer">
 
-            <ContentEditable
-                innerRef={editableRef}
-                html={titleLookup}
-                onChange={handleChange}
-                tagName="div"
-                className="HomeNavBarLookup"
-            />
+                <ContentEditable
+                    innerRef={editableRef}
+                    html={titleLookup}
+                    onChange={handleChange}
+                    tagName="div"
+                    className="HomeNavBarLookup"
+                />
 
-            <button className="HomeNavBarButton" onClick = {() => findTitles()}> Find Document </button>
+                <button className="HomeNavBarButton" onClick = {() => findTitles()}> Find Document </button>
 
-        </div>
-
-        {barIsActive === true ? (
-
-            <div className = "HomeNavBarSuggestionContainer">
-                <div>
-                    {matchingTitles.map((title, index) => {
-                        return (
-                            <Link to="/document" key={index} className = "HomeNavBarSuggestion" onClick = {() => getDocument(title)}>
-                                <h3>{title}</h3>
-                            </Link>
-                        )
-                    })}
-                </div>
-
-                <button className = "HomeNavBarButton" onClick = {() => closeSearchBar()}> Close </button>
             </div>
 
-        ) : (
+            {barIsActive === true ? (
 
-            null
+                <div className = "HomeNavBarSuggestionContainer">
+                    <div>
+                        {matchingTitles.map((title, index) => {
+                            return (
+                                <Link to="/document" key={index} className = "HomeNavBarSuggestion" onClick = {() => getDocument(title)}>
+                                    <h3>{title}</h3>
+                                </Link>
+                            )
+                        })}
+                    </div>
 
-        )}
+                    <button className = "HomeNavBarButton" onClick = {() => closeSearchBar()}> Close </button>
+                </div>
 
+            ) : (
+
+                null
+
+            )}
         </>
-
                                     
     );
 
