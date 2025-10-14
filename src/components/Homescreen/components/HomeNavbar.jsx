@@ -49,6 +49,7 @@ function HomeNavBar (){
 
     }
 
+
     const closeSearchBar = () => {
 
         setBarIsActive(false);
@@ -76,13 +77,11 @@ function HomeNavBar (){
 
             {barIsActive === true ? (
 
-                <div className = "HomeNavBarSuggestionContainer">
-                    <div>
+                <div className = "HomeNavBarSuggestionsFlag">
+                    <div className="HomeNavBarSuggestionsContainer">
                         {matchingTitles.map((title, index) => {
                             return (
-                                <Link to="/document" key={index} className = "HomeNavBarSuggestion" onClick = {() => getDocument(title)}>
-                                    <h3>{title}</h3>
-                                </Link>
+                                <Link to="/document" className = "HomeNavBarSuggestionPage" key={index} onClick = {() => getDocument(title)}> {title} </Link>
                             )
                         })}
                     </div>

@@ -37,18 +37,14 @@ function Docscreen (){
 
         if (ActiveDocument !== -1){
 
-            setDocuments(prev => {
-                let newDocs = [...prev];
-                newDocs[ActiveDocument] = currentDocument;
-                return newDocs;
-            });
+            let copyDocs = [...Documents];
+            const filteredDocuments = copyDocs.filter((_, i) => i !== ActiveDocument);
+            setDocuments([currentDocument, ...filteredDocuments]);
 
         } else {
 
-            const newIndex = Documents.length;
-
-            setDocuments(prev => [...prev, currentDocument]);
-
+            const newIndex = 0;
+            setDocuments(prev => [currentDocument, ...prev]);
             setActiveDocument(newIndex);
 
         }
@@ -59,15 +55,13 @@ function Docscreen (){
 
         if (ActiveDocument !== -1){
 
-            setDocuments(prev => {
-                let newDocs = [...prev];
-                newDocs[ActiveDocument] = currentDocument;
-                return newDocs;
-            });
+            let copyDocs = [...Documents];
+            const filteredDocuments = copyDocs.filter((_, i) => i !== ActiveDocument);
+            setDocuments([currentDocument, ...filteredDocuments]);
 
         } else {
 
-            setDocuments(prev => [...prev, currentDocument]);
+            setDocuments(prev => [currentDocument, ...prev]);
 
         }
 
