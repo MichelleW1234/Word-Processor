@@ -3,6 +3,7 @@ import {useState, useRef} from "react";
 import ContentEditable from "react-contenteditable";
 
 import DocTitleChanger from "./DocTitleChanger.jsx";
+import DocToolBar from "./DocToolBar.jsx";
 
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
@@ -84,40 +85,44 @@ function Docscreen (){
 
     return (
 
-        <div className = "DocscreenLayout">
+        <>
+            <DocToolBar/>
+            
+            <div className = "DocscreenLayout">
 
-            {openTitleFlag === true && 
-            <DocTitleChanger
-                setOpenTitleFlag = {setOpenTitleFlag}
-                currentDocument={currentDocument}
-                setCurrentDocument = {setCurrentDocument}
-            />}
+                {openTitleFlag === true && 
+                <DocTitleChanger
+                    setOpenTitleFlag = {setOpenTitleFlag}
+                    currentDocument={currentDocument}
+                    setCurrentDocument = {setCurrentDocument}
+                />}
 
-            <div className = "DocComponentsContainer">
+                <div className = "DocComponentsContainer">
 
-                <div className = "DocTitleContainer">
-                    <h1 className = "DocTitle"> {currentDocument[2]} </h1>
-                    <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
-                </div>
+                    <div className = "DocTitleContainer">
+                        <h1 className = "DocTitle"> {currentDocument[2]} </h1>
+                        <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
+                    </div>
 
-                <ContentEditable
-                    innerRef={editableRef}
-                    html={currentDocument[0]}
-                    onChange={handleChange}
-                    tagName="div"
-                    className="DocPaper"
-                />
+                    <ContentEditable
+                        innerRef={editableRef}
+                        html={currentDocument[0]}
+                        onChange={handleChange}
+                        tagName="div"
+                        className="DocPaper"
+                    />
 
-                <div className = "DocNavButtonsContainer">
-                    <button className = "DocButton" onClick = {() => saveProgress()}> Save </button>
-                    <Link to="/home" className = "DocButton" onClick = {() => leaveDocument()}> Save + Exit </Link>
-                    <Link to="/home" className = "DocButton" onClick = {() => deleteDocument()}> Delete </Link>
-    
+                    <div className = "DocNavButtonsContainer">
+                        <button className = "DocButton" onClick = {() => saveProgress()}> Save </button>
+                        <Link to="/home" className = "DocButton" onClick = {() => leaveDocument()}> Save + Exit </Link>
+                        <Link to="/home" className = "DocButton" onClick = {() => deleteDocument()}> Delete </Link>
+        
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
+        </>
         
     );
 

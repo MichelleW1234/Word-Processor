@@ -61,7 +61,7 @@ function HomeNavBar (){
     return (
 
         <>
-            <div className = "HomeNavBarContainer">
+            <div className = "NavBarContainer">
 
                 <ContentEditable
                     innerRef={editableRef}
@@ -71,7 +71,7 @@ function HomeNavBar (){
                     className="HomeNavBarLookup"
                 />
 
-                <button className="HomeNavBarButton" onClick = {() => findTitles()}> Find Document </button>
+                <button className="NavBarButton" onClick = {() => findTitles()}> Find Document </button>
 
             </div>
 
@@ -79,14 +79,24 @@ function HomeNavBar (){
 
                 <div className = "HomeNavBarSuggestionsFlag">
                     <div className="HomeNavBarSuggestionsContainer">
-                        {matchingTitles.map((title, index) => {
-                            return (
-                                <Link to="/document" className = "HomeNavBarSuggestionPage" key={index} onClick = {() => getDocument(title)}> {title} </Link>
-                            )
-                        })}
+
+                        {matchingTitles.length === 0 ? (
+
+                            <h1 className = "HomeNavBarNoSuggestions"> No results... </h1>
+
+                        ) : (
+
+                            matchingTitles.map((title, index) => {
+                                return (
+                                    <Link to="/document" className = "HomeNavBarSuggestionPage" key={index} onClick = {() => getDocument(title)}> {title} </Link>
+                                )
+                            })
+
+                        )}
+                        
                     </div>
 
-                    <button className = "HomeNavBarButton" onClick = {() => closeSearchBar()}> Close </button>
+                    <button className = "HomeNavBarCloseButton" onClick = {() => closeSearchBar()}> Close </button>
                 </div>
 
             ) : (
