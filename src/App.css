@@ -43,13 +43,12 @@ a:active {
  
 ::-webkit-scrollbar-track {
   background: #0c0042;  
-  border-radius: 1rem;     
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(rgb(166, 203, 255), rgb(6, 92, 196));
+  background-color: rgb(198, 202, 255);
   border-radius: 1rem;
-  border: 0.2rem solid #1c0042; 
+  border: 0.15rem solid #1c0042; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
