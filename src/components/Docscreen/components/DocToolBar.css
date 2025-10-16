@@ -1,0 +1,64 @@
+.DocToolBarFontContainer{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 1rem;
+    padding: 2rem;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+
+    border-left: 0.5rem solid black;
+    border-bottom: 0.5rem solid black;
+    border-top: 0.2rem solid black;
+    border-right: 0.2rem solid black;
+    background-color: rgb(185, 234, 255);
+
+}
+
+
+.DocToolBarFontDropDown{
+
+    padding: 0.5rem;
+    font-size: 1.5rem;
+
+    border-left: 0.3rem solid black;
+    border-bottom: 0.3rem solid black;
+    border-top: 0.15rem solid black;
+    border-right: 0.15rem solid black;
+    background-color: rgb(252, 239, 255);
+
+}
+
+.DocToolBarButtonContainer{
+
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+}
+
+.DocToolBarButton {
+
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+
+    border-left: 0.5rem solid black;
+    border-bottom: 0.5rem solid black;
+    border-top: 0.2rem solid black;
+    border-right: 0.2rem solid black;
+    background-color: rgb(241, 168, 255);
+
+}
+
+.DocToolBarButton:hover {
+
+    color: white;
+    background-color: rgb(141, 0, 169);
+
+}

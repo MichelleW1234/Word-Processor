@@ -12,17 +12,18 @@ import "./Docscreen.css";
 
 function Docscreen (){
 
+    const now = new Date();
+    const timeDateString = "Opened at " + now.toLocaleTimeString() + " on " + now.toLocaleDateString();
+
     const {Documents, setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
 
     const [openTitleFlag, setOpenTitleFlag] = useState(false);
-
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
-            ? Documents[ActiveDocument]
-            : ["", "0", "Untitled", "0"]
+            ? [...Documents[ActiveDocument].slice(0, -1), timeDateString]
+            : ["", "0", "Untitled", "0", timeDateString]
         );
-
 
     const editableRef = useRef();
     const handleChange = (evt) => {
@@ -33,20 +34,22 @@ function Docscreen (){
     };
 
 
-
     const saveProgress = () => {
+
+        const now = new Date();
+        const timeDateString = "Saved at " + now.toLocaleTimeString() + " on " + now.toLocaleDateString();
+        const updatedDateAndTime = [...currentDocument.slice(0, -1), timeDateString];
 
         if (ActiveDocument !== -1){
 
             let copyDocs = [...Documents];
             const filteredDocuments = copyDocs.filter((_, i) => i !== ActiveDocument);
-            setDocuments([currentDocument, ...filteredDocuments]);
+            setDocuments([updatedDateAndTime, ...filteredDocuments]);
 
         } else {
 
-            const newIndex = 0;
-            setDocuments(prev => [currentDocument, ...prev]);
-            setActiveDocument(newIndex);
+            setDocuments(prev => [updatedDateAndTime, ...prev]);
+            setActiveDocument(0);
 
         }
 
@@ -54,15 +57,19 @@ function Docscreen (){
 
     const leaveDocument = () => {
 
+        const now = new Date();
+        const timeDateString = "Saved at " + now.toLocaleTimeString() + " on " + now.toLocaleDateString();
+        const updatedDateAndTime = [...currentDocument.slice(0, -1), timeDateString];
+
         if (ActiveDocument !== -1){
 
             let copyDocs = [...Documents];
             const filteredDocuments = copyDocs.filter((_, i) => i !== ActiveDocument);
-            setDocuments([currentDocument, ...filteredDocuments]);
+            setDocuments([updatedDateAndTime, ...filteredDocuments]);
 
         } else {
 
-            setDocuments(prev => [currentDocument, ...prev]);
+            setDocuments(prev => [updatedDateAndTime, ...prev]);
 
         }
 
@@ -86,7 +93,10 @@ function Docscreen (){
     return (
 
         <>
-            <DocToolBar/>
+            <DocToolBar
+                currentDocument = {currentDocument}
+                setCurrentDocument = {setCurrentDocument}
+            />
             
             <div className = "DocscreenLayout">
 

@@ -8,7 +8,7 @@
 
 }
 
-.HomescreenDocContainer{
+.HomescreenDocPagesContainer{
 
     display: flex;
     flex-direction: row;
@@ -18,11 +18,26 @@
 
 }
 
+.HomeDocContainer{
+    
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 1.5rem;
+
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
+    white-space: normal;
+    
+}
+
 .HomeDocPage{
 
     height: 25rem;
-    width: 20rem;
-
+    width: 100%;
     position: relative;
 
     display: flex;
@@ -121,9 +136,11 @@
     font-size: 2rem;
     font-weight: bold;
 
-    word-wrap: break-word;
-    white-space: normal;
-    word-break: break-word;
-    white-space: normal;
+}
+
+.HomeDocDateAndTime{
+
+    color: rgb(75, 0, 75);
+    font-size: 1.5rem;
 
 }

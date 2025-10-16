@@ -32,7 +32,7 @@ function Homescreen (){
         <HomeNavBar/>
         <div className = "HomescreenLayout">
     
-            <div className = "HomescreenDocContainer">
+            <div className = "HomescreenDocPagesContainer">
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
                 {Documents.map((page, index) => {
 
@@ -40,12 +40,15 @@ function Homescreen (){
                                                                     : Documents[index][2];
                                     
                     return (
-                        <div className = "HomeDocPage" key={index}>
-                            <h1 className = "HomeDocTitle">{finalTitle}</h1>
-                            <div className = "Options">
-                                <Link to="/document" className = "HomeDocButton" onClick = {() => goToDocument(index)}> Go to Document</Link>
-                                <button className = "HomeDocButton" onClick = {() => deleteDocument(index)}> Delete </button>
+                        <div className = "HomeDocContainer" key={index}>
+                            <div className = "HomeDocPage">
+                                <h1 className = "HomeDocTitle">{finalTitle}</h1>
+                                <div className = "Options">
+                                    <Link to="/document" className = "HomeDocButton" onClick = {() => goToDocument(index)}> Go to Document</Link>
+                                    <button className = "HomeDocButton" onClick = {() => deleteDocument(index)}> Delete </button>
+                                </div>
                             </div>
+                            <p className = "HomeDocDateAndTime">{Documents[index][4]}</p>
                         </div>
                     )
                 })}
