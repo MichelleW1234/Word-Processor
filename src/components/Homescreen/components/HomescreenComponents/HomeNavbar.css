@@ -68,7 +68,7 @@
     border-bottom: 0.45rem solid black;
     border-right: 0.15rem solid black;
     border-top: 0.15rem solid black;
-    background-color: rgb(207, 180, 255);
+    background-color: rgb(229, 180, 255);
 
 }
 
@@ -76,7 +76,7 @@
 .HomeNavBarSuggestionPage:hover{
 
     color: white;
-    background-color: rgb(154, 72, 235);
+    background-color: rgb(190, 92, 255);
 
 }
 
@@ -96,7 +96,7 @@
     border-bottom: 0.4rem solid black;
     border-right: 0.15rem solid black;
     border-top: 0.15rem solid black;
-    background-color: rgb(174, 176, 255);
+    background-color: rgb(188, 189, 255);
 
 }
 

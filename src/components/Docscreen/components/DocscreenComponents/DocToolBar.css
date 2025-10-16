@@ -1,7 +1,8 @@
 .DocToolBarFontContainer{
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 
     gap: 1rem;
@@ -18,10 +19,20 @@
 }
 
 
-.DocToolBarFontDropDown{
+.DocToolBarFontBox{
 
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
     font-size: 1.5rem;
+    gap: 1rem;
+
+}
+
+.DocToolBarFontSelected{
+
+    padding: 0.5rem 1rem;
 
     border-left: 0.3rem solid black;
     border-bottom: 0.3rem solid black;
@@ -30,6 +41,30 @@
     background-color: rgb(252, 239, 255);
 
 }
+
+.DocToolBarFontButton{
+
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+
+    border-left: 0.3rem solid black;
+    border-bottom: 0.3rem solid black;
+    border-top: 0.15rem solid black;
+    border-right: 0.15rem solid black;
+    background-color: rgb(195, 191, 255);
+
+}
+
+.DocToolBarFontButton:hover{
+
+    color: white;
+    background-color: rgb(15, 0, 228);
+
+}
+
+
+
 
 .DocToolBarButtonContainer{
 
@@ -62,3 +97,4 @@
     background-color: rgb(141, 0, 169);
 
 }
+

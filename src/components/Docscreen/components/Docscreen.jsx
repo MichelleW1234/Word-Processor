@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import {useState, useRef} from "react";
 import ContentEditable from "react-contenteditable";
 
-import DocTitleChanger from "./DocTitleChanger.jsx";
-import DocToolBar from "./DocToolBar.jsx";
+import DocTitleChanger from "./DocscreenComponents/DocTitleChanger.jsx";
+import FontChanger from "./DocscreenComponents/DocFontChanger.jsx";
+import DocToolBar from "./DocscreenComponents/DocToolBar.jsx";
 
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
@@ -12,17 +13,18 @@ import "./Docscreen.css";
 
 function Docscreen (){
 
-    const now = new Date();
-    const timeDateString = "Opened at " + now.toLocaleTimeString() + " on " + now.toLocaleDateString();
+    const allFonts = ["Pixel1", "Pixel2", "Pixel3"];
 
     const {Documents, setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
 
+    const [openFontFlag, setOpenFontFlag] = useState(false);
     const [openTitleFlag, setOpenTitleFlag] = useState(false);
+
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
-            ? [...Documents[ActiveDocument].slice(0, -1), timeDateString]
-            : ["", "0", "Untitled", "0", timeDateString]
+            ? Documents[ActiveDocument]
+            : ["", "0", "Untitled", "0", ""]
         );
 
     const editableRef = useRef();
@@ -96,11 +98,22 @@ function Docscreen (){
             <DocToolBar
                 currentDocument = {currentDocument}
                 setCurrentDocument = {setCurrentDocument}
+                allFonts = {allFonts}
+                setOpenFontFlag = {setOpenFontFlag}
             />
             
             <div className = "DocscreenLayout">
 
-                {openTitleFlag === true && 
+                {openFontFlag === true && openTitleFlag === false &&
+                <FontChanger
+                    setOpenFontFlag = {setOpenFontFlag}
+                    currentDocument = {currentDocument}
+                    setCurrentDocument = {setCurrentDocument}
+                    allFonts = {allFonts}
+                />
+                }
+
+                {openTitleFlag === true && openFontFlag === false &&
                 <DocTitleChanger
                     setOpenTitleFlag = {setOpenTitleFlag}
                     currentDocument={currentDocument}

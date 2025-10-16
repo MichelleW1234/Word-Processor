@@ -2,23 +2,17 @@ import {useState} from "react";
 
 import "./DocToolBar.css";
 
-function DocToolBar ({currentDocument, setCurrentDocument}){
-
-    const [selectedFont, setSelectedFont] = useState(currentDocument[3][0]);
-    const handleChange = (e) => {
-        setSelectedFont(e.target.value);
-    };
+function DocToolBar ({currentDocument, setCurrentDocument, allFonts, setOpenFontFlag}){
 
     return (
 
         <div className = "NavBarContainer">
             <div className="DocToolBarFontContainer">
-                <label htmlFor="font"> Font Style: </label>
-                <select id="font" className="DocToolBarFontDropDown" value={selectedFont} onChange={handleChange}>
-                    <option value="0" > Pixel1 </option>
-                    <option value="1"> Pixel2 </option>
-                    <option value="2"> Pixel3 </option>
-                </select>
+                <div className="DocToolBarFontBox">
+                    <p> Font Style: </p>
+                    <p className = "DocToolBarFontSelected"> {allFonts[currentDocument[3][0]]} </p>
+                </div>
+                <button className = "DocToolBarFontButton" onClick={() => setOpenFontFlag(true)}> Change Font </button>
             </div>
             <div className = "DocToolBarButtonContainer">
                 <button className="DocToolBarButton"> Color </button>

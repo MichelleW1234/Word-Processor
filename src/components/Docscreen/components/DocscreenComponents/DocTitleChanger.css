@@ -1,24 +1,3 @@
-.DocTitleChangerFloatingFlag{
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-
-    gap: 3rem;
-
-    z-index: 1;
-
-    top: 0;
-    left: 0;
-    right: 0;  
-    bottom: 0; 
-
-    background-color: rgba(0, 47, 255, 0.5);
-
-}
-
 .DocTitleChangerBox{
 
     display: flex;
@@ -34,7 +13,7 @@
     border-bottom: 0.6rem solid black;
     border-right: 0.2rem solid black;
     border-top: 0.2rem solid black;
-    background-color: rgb(245, 168, 255);
+    background-color: rgb(247, 184, 255);
 
 }
 
@@ -57,7 +36,7 @@
 .DocTitleChangerButton{
 
     font-size: 2rem;
-    padding: 0.5rem 1.5rem;
+    padding: 1rem 2rem;
 
     border-radius: 0.5rem;
 
@@ -72,10 +51,6 @@
 .DocTitleChangerButton:hover{
 
     color: white;
-    border-top: 0.2rem solid black;
-    border-right: 0.2rem solid black;
-    border-left: 0.5rem solid black;
-    border-bottom: 0.5rem solid black;
-    background-color: rgb(0, 85, 169);
+    background-color: rgb(0, 120, 240);
 
 }

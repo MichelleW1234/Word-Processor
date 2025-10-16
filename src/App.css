@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background-color: rgb(203, 148, 255);
+  background-color: rgb(212, 167, 255);
     
 }
 
@@ -99,5 +99,29 @@ a:active {
   border-right: 0.15rem solid black;
   border-top: 0.15rem solid black;
   background-color: rgb(0, 84, 210);
+
+}
+
+
+/* Floating Flags: */
+
+.FullScreenFloatingFlag{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+
+  gap: 3rem;
+
+  z-index: 1;
+
+  top: 0;
+  left: 0;
+  right: 0;  
+  bottom: 0; 
+
+  background-color: rgba(0, 47, 255, 0.5);
 
 }

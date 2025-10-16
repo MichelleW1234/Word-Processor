@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
-import HomeNavBar from "./HomeNavbar.jsx";
+import HomeNavBar from "./HomescreenComponents/HomeNavbar.jsx";
 
 import "./Homescreen.css";
 
