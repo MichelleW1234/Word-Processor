@@ -69,6 +69,7 @@
     border-right: 0.15rem solid black;
     border-top: 0.15rem solid black;
     background-color: rgb(229, 180, 255);
+    box-shadow: 0 0 1rem 0.5rem rgb(241, 215, 255);
 
 }
 

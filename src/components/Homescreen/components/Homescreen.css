@@ -14,13 +14,12 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    gap: 3rem;
+    gap: 5rem;
 
 }
 
 .HomeDocContainer{
     
-    width: 20rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,22 +35,24 @@
 
 .HomeDocPage{
 
-    height: 25rem;
-    width: 100%;
+    height: 26rem;
+    width: 20rem;
     position: relative;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     padding: 2rem 1.5rem;
 
-    border-left: 0.4rem solid black;
-    border-bottom: 0.4rem solid black;
-    border-right: 0.15rem solid black;
-    border-top: 0.15rem solid black;
+    color:rgb(0, 17, 124);
     background-color: rgb(206, 227, 255);
+
+    background-image: url("../../../images/image 1.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
 }
 
@@ -78,12 +79,13 @@
     align-items: center;
     justify-content: center;
 
+    box-shadow: 0 0 1rem 0.5rem rgb(31, 0, 167);
 }
 
 
 .HomeDocPageNew{
 
-    height: 25rem;
+    height: 26rem;
     width: 20rem;
 
     font-size: 8rem;
@@ -140,7 +142,10 @@
 
 .HomeDocDateAndTime{
 
-    color: rgb(75, 0, 75);
+    width: 20rem;
+
     font-size: 1.5rem;
+
+    color: rgb(75, 0, 75);
 
 }
