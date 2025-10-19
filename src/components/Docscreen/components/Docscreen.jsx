@@ -24,7 +24,7 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["", "0", "Untitled", "0", ""]
+            : ["", "Untitled", "00000", ""]
         );
 
     const editableRef = useRef();
@@ -33,7 +33,9 @@ function Docscreen (){
 
         // Uses html-formatted text:
         setCurrentDocument(prev => [newText, ...prev.slice(1)]);
+ 
     };
+
 
 
     const saveProgress = () => {
@@ -100,6 +102,7 @@ function Docscreen (){
                 setCurrentDocument = {setCurrentDocument}
                 allFonts = {allFonts}
                 setOpenFontFlag = {setOpenFontFlag}
+                editableRef = {editableRef}
             />
             
             <div className = "DocscreenLayout">
@@ -123,7 +126,7 @@ function Docscreen (){
                 <div className = "DocComponentsContainer">
 
                     <div className = "DocTitleContainer">
-                        <h1 className = "DocTitle"> {currentDocument[2]} </h1>
+                        <h1 className = "DocTitle"> {currentDocument[1]} </h1>
                         <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
                     </div>
 

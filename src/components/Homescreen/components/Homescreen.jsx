@@ -36,8 +36,8 @@ function Homescreen (){
                 <Link to="/document" className = "HomeDocPageNew" > + </Link>
                 {Documents.map((page, index) => {
 
-                    const finalTitle = Documents[index][2].length > 30 ? Documents[index][2].slice(0, 30) + "..." 
-                                                                    : Documents[index][2];
+                    const finalTitle = Documents[index][1].length > 30 ? Documents[index][1].slice(0, 30) + "..." 
+                                                                    : Documents[index][1];
                                     
                     return (
                         <div className = "HomeDocContainer" key={index}>
@@ -48,7 +48,7 @@ function Homescreen (){
                                     <button className = "HomeDocButton" onClick = {() => deleteDocument(index)}> Delete </button>
                                 </div>
                             </div>
-                            <p className = "HomeDocDateAndTime">{Documents[index][4]}</p>
+                            <p className = "HomeDocDateAndTime">{Documents[index][3]}</p>
                         </div>
                     )
                 })}

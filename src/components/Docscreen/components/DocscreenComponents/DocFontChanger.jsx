@@ -4,7 +4,7 @@ import "./DocFontChanger.css";
 
 function FontChanger ({setOpenFontFlag, currentDocument, setCurrentDocument, allFonts}){
 
-    const [selectedFont, setSelectedFont] = useState(currentDocument[3][0]);
+    const [selectedFont, setSelectedFont] = useState(currentDocument[2][0]);
 
     const selectOption = (index) => {
 
@@ -16,7 +16,7 @@ function FontChanger ({setOpenFontFlag, currentDocument, setCurrentDocument, all
 
         setCurrentDocument(prev => {
             let newDoc = [...prev];
-            newDoc[3] = selectedFont + newDoc[3].slice(1);
+            newDoc[2] = selectedFont + newDoc[2].slice(1);
             return newDoc;
         });
 

@@ -7,7 +7,7 @@ function DocTitleChanger ({setOpenTitleFlag, currentDocument, setCurrentDocument
 
     const errorMessage = "Please shorten your title to 40 letters max.";
 
-    const [newTitle, setNewTitle] = useState(currentDocument[2]);
+    const [newTitle, setNewTitle] = useState(currentDocument[1]);
     const [errorFlag, setErrorFlag] = useState(false);
 
     
@@ -36,7 +36,7 @@ function DocTitleChanger ({setOpenTitleFlag, currentDocument, setCurrentDocument
 
                 setCurrentDocument(prev => {
                     let newDocs = [...prev];
-                    newDocs[2]="Untitled";
+                    newDocs[1]="Untitled";
                     return newDocs;
                 })
 
@@ -44,7 +44,7 @@ function DocTitleChanger ({setOpenTitleFlag, currentDocument, setCurrentDocument
 
                 setCurrentDocument( prev => {
                     let newDocs = [...prev];
-                    newDocs[2]= newTitle;
+                    newDocs[1]= newTitle;
                     return newDocs;
                 });
 

@@ -32,7 +32,7 @@ function HomeNavBar (){
     const findTitles = () => {
 
         setBarIsActive(true);
-        const allDocTitles = Documents.map(innerArray => innerArray[2]);
+        const allDocTitles = Documents.map(innerArray => innerArray[1]);
         const filteredTitles = allDocTitles.filter(el => el.toLowerCase().includes(titleLookup.toLowerCase()));
         setMatchingTitles(filteredTitles);
 
