@@ -3,7 +3,6 @@ import {useState, useRef} from "react";
 import ContentEditable from "react-contenteditable";
 
 import DocTitleChanger from "./DocscreenComponents/DocTitleChanger.jsx";
-import FontChanger from "./DocscreenComponents/DocFontChanger.jsx";
 import DocToolBar from "./DocscreenComponents/DocToolBar.jsx";
 
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
@@ -13,18 +12,15 @@ import "./Docscreen.css";
 
 function Docscreen (){
 
-    const allFonts = ["Pixel1", "Pixel2", "Pixel3"];
-
     const {Documents, setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
 
-    const [openFontFlag, setOpenFontFlag] = useState(false);
     const [openTitleFlag, setOpenTitleFlag] = useState(false);
 
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["", "Untitled", "00000", ""]
+            : ["", "Untitled", "00", ""]
         );
 
     const editableRef = useRef();
@@ -97,36 +93,25 @@ function Docscreen (){
     return (
 
         <>
+
+            {openTitleFlag === true &&
+            <DocTitleChanger
+                setOpenTitleFlag = {setOpenTitleFlag}
+                currentDocument={currentDocument}
+                setCurrentDocument = {setCurrentDocument}
+            />}
+
             <DocToolBar
                 currentDocument = {currentDocument}
                 setCurrentDocument = {setCurrentDocument}
-                allFonts = {allFonts}
-                setOpenFontFlag = {setOpenFontFlag}
-                editableRef = {editableRef}
             />
             
             <div className = "DocscreenLayout">
 
-                {openFontFlag === true && openTitleFlag === false &&
-                <FontChanger
-                    setOpenFontFlag = {setOpenFontFlag}
-                    currentDocument = {currentDocument}
-                    setCurrentDocument = {setCurrentDocument}
-                    allFonts = {allFonts}
-                />
-                }
-
-                {openTitleFlag === true && openFontFlag === false &&
-                <DocTitleChanger
-                    setOpenTitleFlag = {setOpenTitleFlag}
-                    currentDocument={currentDocument}
-                    setCurrentDocument = {setCurrentDocument}
-                />}
-
                 <div className = "DocComponentsContainer">
 
                     <div className = "DocTitleContainer">
-                        <h1 className = "DocTitle"> {currentDocument[1]} </h1>
+                        <h1 className = {`DocTitle FontStyling${currentDocument[2]}`}> {currentDocument[1]} </h1>
                         <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
                     </div>
 
@@ -135,7 +120,7 @@ function Docscreen (){
                         html={currentDocument[0]}
                         onChange={handleChange}
                         tagName="div"
-                        className="DocPaper"
+                        className={`DocPaper FontStyling${currentDocument[2]}`}
                     />
 
                     <div className = "DocNavButtonsContainer">

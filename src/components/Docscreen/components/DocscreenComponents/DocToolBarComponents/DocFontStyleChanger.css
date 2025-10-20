@@ -1,4 +1,4 @@
-.FontChangerContainer{
+.FontStyleChangerContainer{
 
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
 }
 
 
-.FontChangerOptionsContainer{
+.FontStyleChangerOptionsContainer{
 
     width: 25vw;
     display: flex;
@@ -32,7 +32,7 @@
 
 }
 
-.FontChangerOption{
+.FontStyleChangerOption{
 
     font-size: 1.5rem;
     padding: 1rem 1.5rem;
@@ -47,7 +47,7 @@
 }
 
 
-.FontChangerOptionActive{
+.FontStyleChangerOptionActive{
 
     font-size: 1.5rem;
     padding: 1rem 1.5rem;
@@ -63,7 +63,7 @@
 }
 
 
-.FontChangerDoneButton{
+.FontStyleChangerDoneButton{
 
     font-size: 1.5rem;
     padding: 1rem 1.5rem;
@@ -77,7 +77,7 @@
 
 }
 
-.FontChangerDoneButton:hover{
+.FontStyleChangerDoneButton:hover{
 
     color: white;
     background-color: rgb(0, 102, 255);

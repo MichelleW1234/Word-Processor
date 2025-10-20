@@ -52,6 +52,26 @@
 
 }
 
+.DocPaper00{
+
+  width: 60vw;
+  height: 40rem;
+  overflow-y: auto;
+
+  font-size: 1.5rem;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+
+  border-left: 0.6rem solid black;
+  border-bottom: 0.6rem solid black;
+  border-right: 0.2rem solid black;
+  border-top: 0.2rem solid black;
+  background-color: rgb(194, 224, 255);
+
+}
+
 .DocPaper{
 
   width: 60vw;
@@ -71,6 +91,109 @@
   background-color: rgb(194, 224, 255);
 
 }
+
+.DocPaper {
+  width: 60vw;
+  height: 40rem;
+  overflow-y: auto;
+
+  font-size: 1.5rem;
+  padding: 3rem 3.5rem;
+
+  border-left: 0.6rem solid black;
+  border-bottom: 0.6rem solid black;
+  border-right: 0.2rem solid black;
+  border-top: 0.2rem solid black;
+  background-color: rgb(194, 224, 255);
+}
+
+
+.FontStyling01 {
+  color: red;
+}
+
+.FontStyling11 {
+  color: red;
+}
+
+
+.FontStyling21 {
+  color: red;
+}
+
+.FontStyling02 {
+  color: orange;
+}
+
+.FontStyling12 {
+  color: orange;
+}
+
+.FontStyling22 {
+  color: orange;
+}
+
+.FontStyling03 {
+  color: rgb(255, 0, 183);
+}
+
+.FontStyling13 {
+  color: rgb(255, 0, 183);
+}
+
+.FontStyling23 {
+  color: rgb(255, 0, 183);
+}
+
+.FontStyling04 {
+  color: rgb(255, 208, 0);
+}
+
+.FontStyling14 {
+  color: rgb(255, 208, 0);
+}
+
+.FontStyling24 {
+  color: rgb(255, 208, 0);
+}
+
+.FontStyling05 {
+  color: rgb(0, 197, 0);
+}
+
+.FontStyling15 {
+  color: rgb(0, 197, 0);
+}
+
+.FontStyling25 {
+  color: rgb(0, 197, 0);
+}
+
+.FontStyling06 {
+  color: blue;
+}
+
+.FontStyling16 {
+  color: blue;
+}
+
+.FontStyling26 {
+  color: blue;
+}
+
+.FontStyling07 {
+  color: rgb(136, 0, 181);
+}
+
+.FontStyling17 {
+  color: rgb(136, 0, 181);
+}
+
+.FontStyling27 {
+  color: rgb(136, 0, 181);
+}
+
+
 
 .DocButton{
 
