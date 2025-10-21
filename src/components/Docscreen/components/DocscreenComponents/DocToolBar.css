@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
 .DocToolBarChangeContainer{
 
     display: flex;
@@ -24,8 +27,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    font-size: 1.5rem;
     gap: 1rem;
 
 }
@@ -42,6 +43,30 @@
 
 }
 
+.style-Pixel1{
+
+    font-size: 1.5rem;
+    font-family: monospace;
+
+}
+
+
+.style-Pixel2{
+
+    font-size: 2rem;
+    font-family: 'VT323', monospace;
+
+}
+
+
+.style-Pixel3{
+
+    font-size: 1.5rem;
+    font-family: 'Silkscreen', sans-serif;
+
+}
+
+
 .DocToolBarColorSelected{
 
     height: 3rem;
@@ -54,57 +79,91 @@
 
 }
 
-.DocToolBarColorSelectedBlack{
+.color-Black{
 
     background-color: black;
 
 }
 
 
-.DocToolBarColorSelectedRed{
+.color-Red{
 
     background-color: rgb(255, 0, 0);
 
 }
 
 
-.DocToolBarColorSelectedOrange{
+.color-Orange{
 
     background-color: rgb(255, 166, 0);
 
 }
 
-.DocToolBarColorSelectedPink{
+.color-Pink{
 
     background-color: rgb(255, 0, 183);
 
 }
 
-.DocToolBarColorSelectedYellow{
+.color-Yellow{
 
     background-color: rgb(255, 208, 0);
 
 }
 
-.DocToolBarColorSelectedGreen{
+.color-Green{
 
     background-color: rgb(0, 197, 0);
 
 }
 
 
-.DocToolBarColorSelectedBlue{
+.color-Blue{
 
     background-color: blue; 
 
 }
-
-.DocToolBarColorSelectedPurple{
+.color-Purple{
 
     background-color: rgb(136, 0, 181);
 
 }
 
+.DocToolBarSizeSelected{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    height: 4rem;
+    width: 8rem;
+
+    border-left: 0.3rem solid black;
+    border-bottom: 0.3rem solid black;
+    border-top: 0.15rem solid black;
+    border-right: 0.15rem solid black;
+    background-color: rgb(252, 239, 255);
+
+}
+
+.size-small{
+
+    font-size: 1rem;
+
+}
+
+.size-medium{
+
+    font-size: 1.5rem;
+
+}
+
+.size-large{
+
+    font-size: 2rem;
+
+}
 
 
 .DocToolBarChangeButton{

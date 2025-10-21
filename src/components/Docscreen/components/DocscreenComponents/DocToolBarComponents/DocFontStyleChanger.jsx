@@ -19,11 +19,15 @@ function DocFontStyleChanger ({typeChanging, setOpenFlag, currentDocument, setCu
 
             if (typeChanging === 0) {
 
-                newDoc[2] = selectedOption + newDoc[2][1];
+                newDoc[2] = selectedOption + newDoc[2][1] + newDoc[2][2];
+
+            } else if (typeChanging === 1){
+
+                newDoc[2] = newDoc[2][0] + selectedOption + newDoc[2][2];
 
             } else {
 
-                newDoc[2] = newDoc[2][0] + selectedOption;
+                newDoc[2] = newDoc[2][0] + newDoc[2][1] + selectedOption;
 
             }
 

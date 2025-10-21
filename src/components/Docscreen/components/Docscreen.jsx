@@ -20,7 +20,7 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["", "Untitled", "00", ""]
+            : ["", "Untitled", "001", ""]
         );
 
     const editableRef = useRef();
@@ -111,7 +111,7 @@ function Docscreen (){
                 <div className = "DocComponentsContainer">
 
                     <div className = "DocTitleContainer">
-                        <h1 className = {`DocTitle FontStyling${currentDocument[2]}`}> {currentDocument[1]} </h1>
+                        <h1 className = {`DocTitle style-${currentDocument[2][0]} color-${currentDocument[2][1]}`}> {currentDocument[1]} </h1>
                         <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
                     </div>
 
@@ -119,8 +119,20 @@ function Docscreen (){
                         innerRef={editableRef}
                         html={currentDocument[0]}
                         onChange={handleChange}
+                        onPaste={(e) => {
+                            e.preventDefault();
+
+                            // Get plain text only (no HTML)
+                            const text = e.clipboardData.getData('text/plain');
+
+                            // Replace newlines with <br> to preserve spacing
+                            const cleanHtml = text.replace(/\n/g, '<br>');
+
+                            // Insert clean HTML (no inline styles)
+                            document.execCommand('insertHTML', false, cleanHtml);
+                        }}
                         tagName="div"
-                        className={`DocPaper FontStyling${currentDocument[2]}`}
+                        className={`DocPaper style-${currentDocument[2][0]} color-${currentDocument[2][1]} size-${currentDocument[2][2]}`}
                     />
 
                     <div className = "DocNavButtonsContainer">
