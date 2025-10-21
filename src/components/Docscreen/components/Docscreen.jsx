@@ -26,9 +26,20 @@ function Docscreen (){
     const editableRef = useRef();
     const handleChange = (evt) => {
         const newText = evt.target.value;
-
         // Uses html-formatted text:
         setCurrentDocument(prev => [newText, ...prev.slice(1)]);
+ 
+    };
+
+    const handlePaste = (evt) => {
+        evt.preventDefault();
+
+        // Get HTML or plain text from clipboard
+        let pasted = evt.clipboardData.getData("text/html") || evt.clipboardData.getData("text/plain");
+
+        const newText = "<div span = >" + pasted + prev[0] + "</div>"
+        // Uses html-formatted text:
+        setCurrentDocument(prev => [pasted + prev[0], ...prev.slice(1)]);
  
     };
 
@@ -119,18 +130,7 @@ function Docscreen (){
                         innerRef={editableRef}
                         html={currentDocument[0]}
                         onChange={handleChange}
-                        onPaste={(e) => {
-                            e.preventDefault();
-
-                            // Get plain text only (no HTML)
-                            const text = e.clipboardData.getData('text/plain');
-
-                            // Replace newlines with <br> to preserve spacing
-                            const cleanHtml = text.replace(/\n/g, '<br>');
-
-                            // Insert clean HTML (no inline styles)
-                            document.execCommand('insertHTML', false, cleanHtml);
-                        }}
+                        onPaste = {handlePaste}
                         tagName="div"
                         className={`DocPaper style-${currentDocument[2][0]} color-${currentDocument[2][1]} size-${currentDocument[2][2]}`}
                     />
