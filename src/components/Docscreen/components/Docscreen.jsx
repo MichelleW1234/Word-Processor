@@ -31,17 +31,18 @@ function Docscreen (){
  
     };
 
+    /*
     const handlePaste = (evt) => {
         evt.preventDefault();
 
         // Get HTML or plain text from clipboard
         let pasted = evt.clipboardData.getData("text/html") || evt.clipboardData.getData("text/plain");
 
-        const newText = "<div span = >" + pasted + prev[0] + "</div>"
         // Uses html-formatted text:
         setCurrentDocument(prev => [pasted + prev[0], ...prev.slice(1)]);
  
     };
+    */
 
 
 
@@ -121,16 +122,14 @@ function Docscreen (){
 
                 <div className = "DocComponentsContainer">
 
-                    <div className = "DocTitleContainer">
-                        <h1 className = {`DocTitle style-${currentDocument[2][0]} color-${currentDocument[2][1]}`}> {currentDocument[1]} </h1>
-                        <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
-                    </div>
+                    <h1 className = {`DocTitle style-${currentDocument[2][0]} color-${currentDocument[2][1]}`}> {currentDocument[1]} </h1>
+                    <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
 
                     <ContentEditable
                         innerRef={editableRef}
                         html={currentDocument[0]}
                         onChange={handleChange}
-                        onPaste = {handlePaste}
+                        /*onPaste = {handlePaste}*/
                         tagName="div"
                         className={`DocPaper style-${currentDocument[2][0]} color-${currentDocument[2][1]} size-${currentDocument[2][2]}`}
                     />

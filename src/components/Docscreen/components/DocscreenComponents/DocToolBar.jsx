@@ -53,25 +53,25 @@ function DocToolBar ({currentDocument, setCurrentDocument}){
                 <div className="DocToolBarChangeContainer">
                     <div className="DocToolBarChangeBox">
                         <p> Font Type: </p>
-                        <p className = {`DocToolBarFontSelected style-${allFonts[currentDocument[2][0]]}`}> {allFonts[currentDocument[2][0]]} </p>
+                        <p className = {`DocToolBarOptionBox style-${allFonts[currentDocument[2][0]]}`}> {allFonts[currentDocument[2][0]]} </p>
                     </div>
                     <button className = "DocToolBarChangeButton" onClick={() => setOpenFontFlag(true)}> Change Font </button>
                 </div>
                 <div className="DocToolBarChangeContainer">
                     <div className="DocToolBarChangeBox">
                         <p> Font Color: </p>
-                        <p className = {`DocToolBarColorSelected color-${allColors[currentDocument[2][1]]}`}></p>
+                        <p className = {`DocToolBarColorBox color-${allColors[currentDocument[2][1]]}`}></p>
                     </div>
                     <button className = "DocToolBarChangeButton" onClick={() => setOpenColorFlag(true)}> Change Color </button>
                 </div>
                 <div className="DocToolBarChangeContainer">
                     <div className="DocToolBarChangeBox">
                         <p> Font Size: </p>
-                        <p className = {`DocToolBarSizeSelected size-${allSizes[currentDocument[2][2]]}`}>{allSizes[currentDocument[2][2]]}</p>
+                        <p className = {`DocToolBarOptionBox size-${allSizes[currentDocument[2][2]]}`}>{allSizes[currentDocument[2][2]]}</p>
                     </div>
                     <button className = "DocToolBarChangeButton" onClick={() => setOpenSizeFlag(true)}> Change Size </button>
                 </div>
-                <button className="DocToolBarButton" onClick = {() => printDocument()}> Print Document </button>
+                <button className="NavBarButton" onClick = {() => printDocument()}> Print Document </button>
             
             </div>
         </>
