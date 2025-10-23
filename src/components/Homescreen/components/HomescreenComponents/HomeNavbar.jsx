@@ -72,6 +72,7 @@ function HomeNavBar (){
                 />
 
                 <button className="NavBarButton" onClick = {() => findTitles()}> Find Document </button>
+                <Link to="/trash" className="NavBarButton"> Trash </Link>
 
             </div>
 
