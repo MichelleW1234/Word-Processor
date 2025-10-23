@@ -47,8 +47,7 @@
     padding: 2rem 2rem;
 
     color:rgb(0, 17, 124);
-    border: 0.3rem solid rgb(2, 0, 117);
-    box-shadow: 0 0 1rem 0.75rem rgb(147, 102, 182);
+    box-shadow: 0 0 1rem 0.5rem rgb(147, 102, 182);
 
     background-image: url("../../../images/image 1.svg");
     background-repeat: no-repeat;
@@ -93,9 +92,8 @@
     font-size: 8rem;
     padding: 2rem;
 
-    border: 0.5rem solid rgb(2, 0, 128);
-    background-color: rgb(150, 160, 255);
-    box-shadow: 0 0 1rem 0.75rem rgb(147, 102, 182);
+    background-color: rgb(150, 188, 255);
+    box-shadow: 0 0 1rem 0.5rem rgb(147, 102, 182);
 
 }
 
