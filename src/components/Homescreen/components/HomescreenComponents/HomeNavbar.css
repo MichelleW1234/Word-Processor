@@ -9,7 +9,8 @@
     border-bottom: 0.35rem solid black;
     border-right: 0.15rem solid black;
     border-top: 0.15rem solid black;
-    background-color: white;
+    background-color: rgb(234, 242, 255);
+    box-shadow: 0 0 1rem 0.5rem rgb(112, 125, 196);
 
 }
 
@@ -96,6 +97,7 @@
     border-right: 0.15rem solid black;
     border-top: 0.15rem solid black;
     background-color: rgb(188, 189, 255);
+    box-shadow: 0 0 1rem 0.75rem rgb(165, 169, 255);
 
 }
 

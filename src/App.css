@@ -79,7 +79,7 @@ button{
 
   border-bottom: 0.35rem solid black;
   background-color: rgb(152, 197, 255);
-
+  box-shadow: 0 0 1rem 0.75rem rgb(142, 101, 179);
 
 }
 
@@ -95,6 +95,7 @@ button{
   border-right: 0.15rem solid black;
   border-top: 0.15rem solid black;
   background-color: rgb(197, 245, 255);
+  box-shadow: 0 0 1rem 0.5rem rgb(112, 125, 196);
 
 }
 

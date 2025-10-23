@@ -41,6 +41,7 @@
   border-right: 0.15rem solid black;
   border-top: 0.15rem solid black;
   background-color: rgb(194, 224, 255);
+  box-shadow: 0 0 1rem 0.75rem rgb(167, 112, 196);
 
 }
 
@@ -60,142 +61,198 @@
   border-right: 0.15rem solid black;
   border-top: 0.15rem solid black;
   background-color: rgb(194, 224, 255);
+  box-shadow: 0 0 1rem 0.75rem rgb(167, 112, 196);
 
 }
 
-.style-0 {
+.DocStyle-0 {
 
   font-family: monospace;
 
 }
 
-.style-1 {
+.DocStyle-1 {
 
   font-family: 'VT323', monospace;
 
 }
 
-.style-2 {
+.DocStyle-2 {
 
   font-family: 'Silkscreen', sans-serif;
 
 }
 
-.size-0 {
+.DocSize-0 {
 
   font-size: 1rem;
 
 }
 
-.size-1 {
+.DocSize-1 {
 
   font-size: 1.3rem;
 
 }
 
-.size-2 {
+.DocSize-2 {
 
   font-size: 1.5rem;
 
 }
 
-.color-0{
+.DocColor-0{
 
   color: black;
 
 }
 
 
-.color-1{
+.DocColor-1{
 
   color: rgb(255, 0, 0);
 
 }
 
 
-.color-2{
+.DocColor-2{
 
   color: rgb(127, 0, 0);
 
 }
 
 
-.color-3{
+.DocColor-3{
 
   color: rgb(255, 166, 0);
 
 }
 
-.color-4{
+.DocColor-4{
 
   color: rgb(150, 58, 0);
 
 }
 
 
-.color-5{
+.DocColor-5{
 
   color: rgb(255, 0, 183);
 
 }
 
-.color-6{
+.DocColor-6{
 
   color: rgb(137, 0, 101);
 
 }
 
-.color-7{
+.DocColor-7{
 
   color: rgb(255, 208, 0);
 
 }
 
-.color-8{
+.DocColor-8{
 
   color: rgb(159, 114, 0);
 
 }
 
-.color-9{
+.DocColor-9{
 
   color: rgb(0, 197, 0);
 
 }
 
 
-.color-a{
+.DocColor-a{
 
   color: rgb(8, 94, 0);
 
 }
 
 
-.color-b{
+.DocColor-b{
 
   color: rgb(0, 110, 255); 
 
 }
 
-.color-c{
+.DocColor-c{
 
   color: rgb(0, 0, 190); 
 
 }
 
 
-.color-d{
+.DocColor-d{
 
   color: rgb(153, 0, 204);
 
 }
 
 
-.color-e{
+.DocColor-e{
 
   color: rgb(71, 0, 138);
 
 }
+
+
+.DocPage-0{
+
+  background-color: rgb(218, 238, 255);
+
+}
+
+.DocPage-1{
+
+  background-color: rgb(255, 218, 218);
+
+}
+
+.DocPage-2{
+
+  background-color: rgb(254, 231, 210);
+
+}
+
+
+.DocPage-3{
+
+  background-color: rgb(255, 218, 254);
+
+}
+
+
+.DocPage-4{
+
+  background-color: rgb(255, 250, 225);
+
+}
+
+.DocPage-5{
+
+  background-color: rgb(224, 255, 228);
+
+}
+
+
+.DocPage-6{
+
+  background-color: rgb(186, 208, 255);
+
+}
+
+
+.DocPage-7{
+
+  background-color: rgb(225, 206, 255);
+  
+
+}
+
 
 
 .DocButton{
@@ -209,6 +266,7 @@
   border-right: 0.15rem solid black;
   border-top: 0.15rem solid black;
   background-color: rgb(154, 172, 255);
+  box-shadow: 0 0 1rem 0.75rem rgb(167, 112, 196);
 
 }
 

@@ -20,7 +20,7 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["", "Untitled", "001", ""]
+            : ["", "Untitled", "0010", ""]
         );
 
     const editableRef = useRef();
@@ -111,7 +111,7 @@ function Docscreen (){
 
                 <div className = "DocComponentsContainer">
 
-                    <h1 className = {`DocTitle style-${currentDocument[2][0]} color-${currentDocument[2][1]}`}> {currentDocument[1]} </h1>
+                    <h1 className = {`DocTitle DocStyle-${currentDocument[2][0]} DocColor-${currentDocument[2][1]} DocPage-${currentDocument[2][3]}`}> {currentDocument[1]} </h1>
                     <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
 
                     <ContentEditable
@@ -119,7 +119,7 @@ function Docscreen (){
                         html={currentDocument[0]}
                         onChange={handleChange}
                         tagName="div"
-                        className={`DocPaper style-${currentDocument[2][0]} color-${currentDocument[2][1]} size-${currentDocument[2][2]}`}
+                        className={`DocPaper DocStyle-${currentDocument[2][0]} DocColor-${currentDocument[2][1]} DocSize-${currentDocument[2][2]} DocPage-${currentDocument[2][3]}`}
                     />
 
                     <div className = "DocNavButtonsContainer">
