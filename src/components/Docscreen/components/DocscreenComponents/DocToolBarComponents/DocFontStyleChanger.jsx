@@ -8,7 +8,9 @@ function DocFontStyleChanger ({typeChanging, setOpenFlag, currentDocument, setCu
 
     const selectOption = (index) => {
 
-        setSelectedOption(String(index));
+        const hex = index.toString(16);
+        console.log(hex);
+        setSelectedOption(String(hex));
 
     }
 
@@ -46,7 +48,7 @@ function DocFontStyleChanger ({typeChanging, setOpenFlag, currentDocument, setCu
                 <div className="FontStyleChangerOptionsContainer">
                     {allOptions.map((option, index) => {
 
-                        const picked = String(index) === selectedOption;
+                        const picked = index.toString(16) === selectedOption;
 
                         return (
 

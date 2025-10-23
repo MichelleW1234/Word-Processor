@@ -99,55 +99,103 @@
 
 }
 
-
 .color-0{
 
   color: black;
 
 }
 
+
 .color-1{
 
-  color: red;
+  color: rgb(255, 0, 0);
 
 }
+
 
 .color-2{
 
-  color: orange;
+  color: rgb(127, 0, 0);
 
 }
 
+
 .color-3{
 
-  color: rgb(255, 0, 183);
+  color: rgb(255, 166, 0);
 
 }
 
 .color-4{
 
-  color: rgb(255, 208, 0);
+  color: rgb(150, 58, 0);
 
 }
 
+
 .color-5{
 
-  color: rgb(0, 197, 0);
+  color: rgb(255, 0, 183);
 
 }
 
 .color-6{
 
-  color: blue;
+  color: rgb(137, 0, 101);
 
 }
 
 .color-7{
 
-  color: rgb(136, 0, 181);
+  color: rgb(255, 208, 0);
 
 }
 
+.color-8{
+
+  color: rgb(159, 114, 0);
+
+}
+
+.color-9{
+
+  color: rgb(0, 197, 0);
+
+}
+
+
+.color-a{
+
+  color: rgb(8, 94, 0);
+
+}
+
+
+.color-b{
+
+  color: rgb(0, 110, 255); 
+
+}
+
+.color-c{
+
+  color: rgb(0, 0, 190); 
+
+}
+
+
+.color-d{
+
+  color: rgb(153, 0, 204);
+
+}
+
+
+.color-e{
+
+  color: rgb(71, 0, 138);
+
+}
 
 
 .DocButton{

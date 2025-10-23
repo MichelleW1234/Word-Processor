@@ -8,7 +8,7 @@ import "./DocToolBar.css";
 function DocToolBar ({currentDocument, setCurrentDocument}){
 
     const allFonts = ["Pixel1", "Pixel2", "Pixel3"];
-    const allColors = ["Black", "Red", "Orange", "Pink", "Yellow", "Green", "Blue", "Purple"];
+    const allColors = ["Black", "Red", "Dark Red", "Orange", "Dark Orange", "Pink", "Dark Pink", "Yellow", "Dark Yellow", "Green", "Dark Green", "Blue", "Dark Blue", "Purple", "Dark Purple"];
     const allSizes = ["small", "medium", "large"];
 
     const [openFontFlag, setOpenFontFlag] = useState(false);
@@ -53,21 +53,21 @@ function DocToolBar ({currentDocument, setCurrentDocument}){
                 <div className="DocToolBarChangeContainer">
                     <div className="DocToolBarChangeBox">
                         <p> Font Type: </p>
-                        <p className = {`DocToolBarOptionBox style-${allFonts[currentDocument[2][0]]}`}> {allFonts[currentDocument[2][0]]} </p>
+                        <p className = {`DocToolBarOptionBox style-${currentDocument[2][0]}`}> {allFonts[currentDocument[2][0]]} </p>
                     </div>
                     <button className = "DocToolBarChangeButton" onClick={() => setOpenFontFlag(true)}> Change Font </button>
                 </div>
                 <div className="DocToolBarChangeContainer">
                     <div className="DocToolBarChangeBox">
                         <p> Font Color: </p>
-                        <p className = {`DocToolBarColorBox color-${allColors[currentDocument[2][1]]}`}></p>
+                        <p className = {`DocToolBarColorBox color-${currentDocument[2][1]}`}></p>
                     </div>
                     <button className = "DocToolBarChangeButton" onClick={() => setOpenColorFlag(true)}> Change Color </button>
                 </div>
                 <div className="DocToolBarChangeContainer">
                     <div className="DocToolBarChangeBox">
                         <p> Font Size: </p>
-                        <p className = {`DocToolBarOptionBox size-${allSizes[currentDocument[2][2]]}`}>{allSizes[currentDocument[2][2]]}</p>
+                        <p className = {`DocToolBarOptionBox size-${currentDocument[2][2]}`}>{allSizes[currentDocument[2][2]]}</p>
                     </div>
                     <button className = "DocToolBarChangeButton" onClick={() => setOpenSizeFlag(true)}> Change Size </button>
                 </div>

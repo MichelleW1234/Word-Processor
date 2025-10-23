@@ -21,11 +21,13 @@
 
 .FontStyleChangerOptionsContainer{
 
-    width: 25vw;
+    width: 30vw;
+    max-height: 30vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
     flex-wrap: wrap;
 
     gap: 1rem;
