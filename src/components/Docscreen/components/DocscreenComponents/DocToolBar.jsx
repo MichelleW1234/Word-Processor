@@ -10,7 +10,7 @@ function DocToolBar ({currentDocument, setCurrentDocument}){
     const allFonts = ["Pixel1", "Pixel2", "Pixel3"];
     const allColors = ["black", "red", "dark red", "orange", "dark orange", "pink", "dark pink", "yellow", "dark yellow", "green", "dark green", "blue", "dark blue", "purple", "dark purple"];
     const allSizes = ["small", "medium", "large"];
-    const allPageColors = ["white", "light red", "light orange", "light pink", "light yellow", "light green", "light blue", "light purple"];
+    const allPageColors = ["white", "light red", "light orange", "light pink", "light yellow", "light green", "light blue", "light purple", "black"];
 
     const [openFontFlag, setOpenFontFlag] = useState(false);
     const [openColorFlag, setOpenColorFlag] = useState(false);

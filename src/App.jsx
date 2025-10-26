@@ -3,6 +3,7 @@ import './App.css'
 
 import Homescreen from "./components/Homescreen/components/Homescreen.jsx";
 import Docscreen from "./components/Docscreen/components/Docscreen.jsx";
+import Trashscreen from "./components/Trashscreen/components/Trashscreen.jsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             
             <Route path="/home" element={<Homescreen />}/>
             <Route path="/document" element={<Docscreen />}/>
+            <Route path="/trash" element={<Trashscreen />}/>
 
           </Routes>
         </HashRouter>

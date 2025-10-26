@@ -1,0 +1,12 @@
+.TrashscreenLayout{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+
+    padding: 10rem;
+    gap: 5rem;
+
+}

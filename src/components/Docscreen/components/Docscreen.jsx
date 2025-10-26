@@ -112,7 +112,7 @@ function Docscreen (){
                 <div className = "DocComponentsContainer">
 
                     <h1 className = {`DocTitle DocStyle-${currentDocument[2][0]} DocColor-${currentDocument[2][1]} DocPage-${currentDocument[2][3]}`}> {currentDocument[1]} </h1>
-                    <button className = "DocButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
+                    <button className = "GeneralButton" onClick = {() => setOpenTitleFlag(true)}> Edit Title</button>
 
                     <ContentEditable
                         innerRef={editableRef}
@@ -123,9 +123,9 @@ function Docscreen (){
                     />
 
                     <div className = "DocNavButtonsContainer">
-                        <button className = "DocButton" onClick = {() => saveProgress()}> Save </button>
-                        <Link to="/home" className = "DocButton" onClick = {() => leaveDocument()}> Save + Exit </Link>
-                        <Link to="/home" className = "DocButton" onClick = {() => deleteDocument()}> Delete </Link>
+                        <button className = "GeneralButton" onClick = {() => saveProgress()}> Save </button>
+                        <Link to="/home" className = "GeneralButton" onClick = {() => leaveDocument()}> Save + Exit </Link>
+                        <Link to="/home" className = "GeneralButton" onClick = {() => deleteDocument()}> Delete </Link>
         
                     </div>
 

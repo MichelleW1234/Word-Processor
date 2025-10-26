@@ -219,13 +219,13 @@
 
 .DocToolBarSize-1{
 
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 
 }
 
 .DocToolBarSize-2{
 
-    font-size: 1.5rem;
+    font-size: 2rem;
 
 }
 
@@ -278,5 +278,11 @@
 .DocToolBarPage-7{
 
   background-color: rgb(232, 217, 255);
+
+}
+
+.DocToolBarPage-8{
+
+  background-color: rgb(43, 43, 43);
 
 }
