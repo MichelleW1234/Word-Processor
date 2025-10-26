@@ -31,11 +31,9 @@ function Docscreen (){
  
     };
 
-    
 
 
-
-    const saveProgress = () => {
+    const saveProgress = (newActiveDoc) => {
 
         const now = new Date();
         const timeDateString = "Saved at " + now.toLocaleTimeString() + " on " + now.toLocaleDateString();
@@ -43,30 +41,12 @@ function Docscreen (){
 
         if (ActiveDocument !== -1){
 
-            let copyDocs = [...Documents];
-            const filteredDocuments = copyDocs.filter((_, i) => i !== ActiveDocument);
-            setDocuments([updatedDateAndTime, ...filteredDocuments]);
+            let updatedDocs = [...Documents];
+            updatedDocs[ActiveDocument] = updatedDateAndTime;
 
-        } else {
+            const [updatedDoc] = updatedDocs.splice(ActiveDocument, 1);
 
-            setDocuments(prev => [updatedDateAndTime, ...prev]);
-            setActiveDocument(0);
-
-        }
-
-    }
-
-    const leaveDocument = () => {
-
-        const now = new Date();
-        const timeDateString = "Saved at " + now.toLocaleTimeString() + " on " + now.toLocaleDateString();
-        const updatedDateAndTime = [...currentDocument.slice(0, -1), timeDateString];
-
-        if (ActiveDocument !== -1){
-
-            let copyDocs = [...Documents];
-            const filteredDocuments = copyDocs.filter((_, i) => i !== ActiveDocument);
-            setDocuments([updatedDateAndTime, ...filteredDocuments]);
+            setDocuments([updatedDoc, ...updatedDocs]);
 
         } else {
 
@@ -74,7 +54,7 @@ function Docscreen (){
 
         }
 
-        setActiveDocument(-1);
+        setActiveDocument(newActiveDoc);
 
     }
 
@@ -123,8 +103,8 @@ function Docscreen (){
                     />
 
                     <div className = "DocNavButtonsContainer">
-                        <button className = "GeneralButton" onClick = {() => saveProgress()}> Save </button>
-                        <Link to="/home" className = "GeneralButton" onClick = {() => leaveDocument()}> Save + Exit </Link>
+                        <button className = "GeneralButton" onClick = {() => saveProgress(0)}> Save </button>
+                        <Link to="/home" className = "GeneralButton" onClick = {() => saveProgress(-1)}> Save + Exit </Link>
                         <Link to="/home" className = "GeneralButton" onClick = {() => deleteDocument()}> Delete </Link>
         
                     </div>

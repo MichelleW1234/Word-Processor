@@ -33,7 +33,7 @@ function Homescreen (){
         <div className = "HomescreenLayout">
     
             <div className = "HomescreenDocPagesContainer">
-                <Link to="/document" className = "HomeDocPageNew" > + </Link>
+                <Link to="/document" className = "HomeDocPageNew" onClick = {() => goToDocument(-1)}> + </Link>
                 {Documents.map((page, index) => {
 
                     const finalTitle = Documents[index][1].length > 30 ? Documents[index][1].slice(0, 30) + "..." 

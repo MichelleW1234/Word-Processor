@@ -9,7 +9,6 @@ function DocFontStyleChanger ({typeChanging, setOpenFlag, currentDocument, setCu
     const selectOption = (index) => {
 
         const hex = index.toString(16);
-        console.log(hex);
         setSelectedOption(String(hex));
 
     }

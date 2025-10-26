@@ -52,32 +52,32 @@
 
     height: 20rem;
     width: 15rem;
+    display: flex;
+    align-content: center;
     text-align: center;
-    overflow-y: auto;
     
     font-size: 1.5rem;
-    padding: 3rem 2rem;
     font-weight: bold;
 
     word-wrap: break-word;
     white-space: normal;
     word-break: break-word;
 
-    color: black;
-    border-left: 0.35rem solid black;
-    border-bottom: 0.35rem solid black;
-    border-right: 0.15rem solid black;
-    border-top: 0.15rem solid black;
-    background-color: rgb(229, 180, 255);
-    box-shadow: 0 0 1rem 0.5rem rgb(241, 215, 255);
+    color: rgb(3, 0, 85);  
+    box-shadow: 0 0 1rem 0.75rem rgb(199, 161, 255);
+
+    background-image: url("../../../../images/image 1.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
 }
 
 
 .HomeNavBarSuggestionPage:hover{
 
-    color: white;
-    background-color: rgb(190, 92, 255);
+    color: rgb(59, 138, 255);  
+    box-shadow: 0 0 1rem 0.75rem rgb(60, 0, 132);
 
 }
 
