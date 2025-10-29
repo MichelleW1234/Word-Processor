@@ -43,8 +43,8 @@
     flex-wrap: wrap;
     overflow-y: auto;
 
-    gap: 4rem;
-    padding: 3rem;
+    gap: 8rem;
+    padding: 4rem 8rem;
 
 }
 
@@ -64,7 +64,7 @@
     word-break: break-word;
 
     color: rgb(3, 0, 85);  
-    box-shadow: 0 0 1rem 0.75rem rgb(154, 213, 255);
+    box-shadow: 0 0 1rem 0.75rem rgb(174, 202, 255);
 
     background-image: url("../../../../images/image 1.svg");
     background-repeat: no-repeat;
@@ -106,5 +106,6 @@
 
     color: white;
     background-color: rgb(30, 33, 255);
+    box-shadow: 0 0 1rem 0.75rem rgb(119, 126, 255);
 
 }

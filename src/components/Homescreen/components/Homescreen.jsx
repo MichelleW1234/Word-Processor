@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
+import { deleteDocument } from '../../../helpers/Helpers.js';
+
 import HomeNavBar from "./HomescreenComponents/HomeNavbar.jsx";
 
 import "./Homescreen.css";
@@ -17,13 +19,6 @@ function Homescreen (){
         setActiveDocument(indexToActivate);
 
     }
-    
-    const deleteDocument = (indexToRemove) => {
-
-        setDocuments(prev => prev.filter((_, i) => i !== indexToRemove));
-
-    }
-
 
 
     return (
@@ -45,7 +40,7 @@ function Homescreen (){
                                 <h1 className = "HomeDocTitle">{finalTitle}</h1>
                                 <div className = "Options">
                                     <Link to="/document" className = "HomeDocButton" onClick = {() => goToDocument(index)}> Go to Document</Link>
-                                    <button className = "HomeDocButton" onClick = {() => deleteDocument(index)}> Delete </button>
+                                    <button className = "HomeDocButton" onClick = {() => deleteDocument(setDocuments, index)}> Delete </button>
                                 </div>
                             </div>
                             <p className = "HomeDocDateAndTime">{Documents[index][3]}</p>

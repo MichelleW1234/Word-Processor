@@ -8,6 +8,8 @@ import DocToolBar from "./DocscreenComponents/DocToolBar.jsx";
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
+import { deleteDocument } from '../../../helpers/Helpers.js';
+
 import "./Docscreen.css";
 
 function Docscreen (){
@@ -59,11 +61,11 @@ function Docscreen (){
     }
 
 
-    const deleteDocument = () => {
+    const deleting = () => {
 
         if (ActiveDocument !== -1){
 
-            setDocuments(prev => prev.filter((_, i) => i !== ActiveDocument));
+            deleteDocument(setDocuments, ActiveDocument);
             setActiveDocument(-1);
 
         }
@@ -105,7 +107,7 @@ function Docscreen (){
                     <div className = "DocNavButtonsContainer">
                         <button className = "GeneralButton" onClick = {() => saveProgress(0)}> Save </button>
                         <Link to="/home" className = "GeneralButton" onClick = {() => saveProgress(-1)}> Save + Exit </Link>
-                        <Link to="/home" className = "GeneralButton" onClick = {() => deleteDocument()}> Delete </Link>
+                        <Link to="/home" className = "GeneralButton" onClick = {() => deleting()}> Delete </Link>
         
                     </div>
 
