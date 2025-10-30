@@ -6,7 +6,7 @@
     overflow-y: auto;
 
     gap: 2rem;
-    padding: 8rem;
+    padding: 4rem;
 
 }
 
@@ -28,66 +28,69 @@
 
 .TrashOptionPage{
 
-    height: 21rem;
-    width: 16rem;
+    height: 21.3rem;
+    width: 21.3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    position: relative;
+    text-align: center;
 
-    font-size: 1rem;
     font-weight: bold;
-    padding: 2rem;
+    font-size: 1.5rem;
+    padding: 1rem;
 
     color: rgb(6, 0, 73);
-    box-shadow: 0 0 1rem 0.5rem rgb(147, 102, 182);
+    filter: 
+        drop-shadow(0 0 0.5rem rgba(147, 102, 182, 0.8))
+        drop-shadow(0 0 0.5rem rgba(147, 102, 182, 0.8))
+        drop-shadow(0 0 0.5rem rgba(147, 102, 182, 0.8));
 
     word-wrap: break-word;
     white-space: normal;
     word-break: break-word;
 
-    background-image: url("../../../images/image 1.svg");
+    background-image: url("../../../images/image 3.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 
 }
 
-.TrashOptionPage:hover .Options {
+.TrashOptionPage:hover {
 
+    filter: 
+    drop-shadow(0 0 0.5rem rgba(0, 4, 115, 0.8))
+    drop-shadow(0 0 0.5rem rgba(0, 4, 115, 0.8))
+    drop-shadow(0 0 0.5rem rgba(0, 4, 115, 0.8));
+
+}
+
+.TrashOptionPageActive {
+
+    height: 21.3rem;
+    width: 21.3rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    text-align: center;
 
-    box-shadow: 0 0 1rem 0.5rem rgb(31, 0, 167);
-}
-
-
-.TrashOptionTitle{
-
-    font-size: 1.8rem;
-
-}
-
-.TrashOptionButton{
-
-    font-size: 1.2rem;
+    font-weight: bold;
+    font-size: 1.5rem;
     padding: 1rem;
-    border-radius: 0.5rem;
 
-    border-left: 0.3rem solid black;
-    border-bottom: 0.3rem solid black;
-    border-right: 0.15rem solid black;
-    border-top: 0.15rem solid black;
-    background-color: rgb(160, 195, 255);
+    color: rgb(6, 0, 73);
+    filter: 
+        drop-shadow(0 0 0.5rem rgba(0, 60, 255, 0.8))
+        drop-shadow(0 0 0.5rem rgba(0, 60, 255, 0.8))
+        drop-shadow(0 0 0.5rem rgba(0, 60, 255, 0.8));
 
-}
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
 
-.TrashOptionButton:hover{
-
-    color: white;
-    background-color: rgb(17, 0, 255);
+    background-image: url("../../../images/image 3.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
 }

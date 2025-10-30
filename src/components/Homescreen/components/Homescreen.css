@@ -57,6 +57,24 @@
 }
 
 
+.Options {
+
+  display: none;
+  position: absolute;
+
+  top: 0; 
+  right: 0; 
+  bottom: 0; 
+  left: 0;
+  z-index: 1;
+
+  gap: 2rem;
+
+  background-color: rgba(84, 115, 255, 0.5);
+
+}
+
+
 .HomeDocPage:hover .Options {
 
     display: flex;
