@@ -67,7 +67,7 @@ function Docscreen (){
 
         if (ActiveDocument !== -1){
 
-            deleteDocument(setTrash, Documents, setDocuments, ActiveDocument);
+            deleteDocument(setTrash, setDocuments, ActiveDocument, currentDocument);
             setActiveDocument(-1);
 
         } else {

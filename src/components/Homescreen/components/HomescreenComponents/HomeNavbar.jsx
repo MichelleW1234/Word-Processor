@@ -36,7 +36,6 @@ function HomeNavBar (){
         const filteredTitles = allDocTitles.filter(el => el.toLowerCase().includes(titleLookup.toLowerCase()));
         setMatchingTitles(filteredTitles);
 
-
     }
 
     const getDocument = (documentTitle) => {
@@ -89,8 +88,8 @@ function HomeNavBar (){
 
                             matchingTitles.map((title, index) => {
 
-                                const finalTitle = Documents[index][1].length > 30 ? Documents[index][1].slice(0, 30) + "..." 
-                                    : Documents[index][1];
+                                const finalTitle = matchingTitles[index].length > 30 ? matchingTitles[index].slice(0, 30) + "..." 
+                                    : matchingTitles[index];
 
                                 return (
                                     <Link to="/document" className = "HomeNavBarSuggestionPage" key={index} onClick = {() => getDocument(title)}> {finalTitle} </Link>

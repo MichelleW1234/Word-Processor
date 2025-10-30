@@ -60,15 +60,13 @@ function Trashscreen (){
 
                         return (
 
-                            <>
-                                <div className = "TrashOptionPage" key = {index} > 
-                                    <h1 className="TrashOptionTitle">{finalTitle}</h1>
-                                    <div className="Options">
-                                        <button className = "TrashOptionButton" onClick = {() => restore(index)}> Restore </button>
-                                        <button className = "TrashOptionButton" onClick = {() => deletePermanently(index)}> Delete Permanently </button>
-                                    </div>
+                            <div className = "TrashOptionPage" key = {index} > 
+                                <h1 className="TrashOptionTitle">{finalTitle}</h1>
+                                <div className="Options">
+                                    <button className = "TrashOptionButton" onClick = {() => restore(index)}> Restore </button>
+                                    <button className = "TrashOptionButton" onClick = {() => deletePermanently(index)}> Delete Permanently </button>
                                 </div>
-                            </>
+                            </div>
 
                         )
 

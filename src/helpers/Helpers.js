@@ -1,18 +1,16 @@
-export const deleteDocument = (setTrash, Documents, setDocuments, indexToRemove) => {
-
-    const removedDocument = Documents[indexToRemove];
+export const deleteDocument = (setTrash, setDocuments, indexToRemove, documentToRemove) => {
 
     setDocuments(prev => {
         return prev.filter((_, i) => i !== indexToRemove);
     });
 
-    moveToTrash(removedDocument, setTrash);
+    moveToTrash(documentToRemove, setTrash);
 
 }
 
 export const moveToTrash = (trashDocument, setTrash) => {
 
-    trashDocument[3] = "restored";
+    trashDocument[3] = "Document Restored";
 
     setTrash( prev => {
         let newTrash = [trashDocument, ...prev];

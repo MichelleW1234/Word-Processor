@@ -43,7 +43,7 @@ function Homescreen (){
                                 <h1 className = "HomeDocTitle">{finalTitle}</h1>
                                 <div className = "Options">
                                     <Link to="/document" className = "HomeDocButton" onClick = {() => goToDocument(index)}> Go to Document</Link>
-                                    <button className = "HomeDocButton" onClick = {() => deleteDocument(setTrash, Documents, setDocuments, index)}> Delete </button>
+                                    <button className = "HomeDocButton" onClick = {() => deleteDocument(setTrash, setDocuments, index, Documents[index])}> Delete </button>
                                 </div>
                             </div>
                             <p className = "HomeDocDateAndTime">{Documents[index][3]}</p>
