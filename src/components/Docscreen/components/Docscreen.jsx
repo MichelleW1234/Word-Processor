@@ -6,9 +6,10 @@ import DocTitleChanger from "./DocscreenComponents/DocTitleChanger.jsx";
 import DocToolBar from "./DocscreenComponents/DocToolBar.jsx";
 
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
+import {useTrash} from "../../../providers/TrashProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
-import { deleteDocument } from '../../../helpers/Helpers.js';
+import { deleteDocument, moveToTrash } from '../../../helpers/Helpers.js';
 
 import "./Docscreen.css";
 
@@ -16,6 +17,7 @@ function Docscreen (){
 
     const {Documents, setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
+    const {Trash, setTrash} = useTrash();
 
     const [openTitleFlag, setOpenTitleFlag] = useState(false);
 
@@ -65,8 +67,12 @@ function Docscreen (){
 
         if (ActiveDocument !== -1){
 
-            deleteDocument(setDocuments, ActiveDocument);
+            deleteDocument(setTrash, Documents, setDocuments, ActiveDocument);
             setActiveDocument(-1);
+
+        } else {
+
+            moveToTrash(currentDocument, setTrash);
 
         }
 
@@ -104,7 +110,7 @@ function Docscreen (){
                         className={`DocPaper DocStyle-${currentDocument[2][0]} DocColor-${currentDocument[2][1]} DocSize-${currentDocument[2][2]} DocPage-${currentDocument[2][3]}`}
                     />
 
-                    <div className = "DocNavButtonsContainer">
+                    <div className = "GeneralButtonsContainer">
                         <button className = "GeneralButton" onClick = {() => saveProgress(0)}> Save </button>
                         <Link to="/home" className = "GeneralButton" onClick = {() => saveProgress(-1)}> Save + Exit </Link>
                         <Link to="/home" className = "GeneralButton" onClick = {() => deleting()}> Delete </Link>

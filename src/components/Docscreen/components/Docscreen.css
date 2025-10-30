@@ -257,14 +257,3 @@
   background-color: rgb(43, 43, 43);
 
 }
-
-
-
-.DocNavButtonsContainer{
-
-  display: flex;
-  flex-direction: row;
-
-  gap: 2rem;
-
-}

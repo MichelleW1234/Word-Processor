@@ -2,11 +2,92 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     overflow-y: auto;
 
-    padding: 10rem;
-    gap: 5rem;
+    gap: 2rem;
+    padding: 8rem;
+
+}
+
+.TrashOptionsContainer{
+
+    width: 80vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
+
+    gap: 8rem;
+    padding: 3rem;
+
+}
+
+.TrashOptionPage{
+
+    height: 21rem;
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 2rem;
+
+    color: rgb(6, 0, 73);
+    box-shadow: 0 0 1rem 0.5rem rgb(147, 102, 182);
+
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
+
+    background-image: url("../../../images/image 2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.TrashOptionPage:hover .Options {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 0 1rem 0.5rem rgb(31, 0, 167);
+}
+
+
+.TrashOptionTitle{
+
+    font-size: 1.8rem;
+
+}
+
+.TrashOptionButton{
+
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    border-left: 0.3rem solid black;
+    border-bottom: 0.3rem solid black;
+    border-right: 0.15rem solid black;
+    border-top: 0.15rem solid black;
+    background-color: rgb(160, 195, 255);
+
+}
+
+.TrashOptionButton:hover{
+
+    color: white;
+    background-color: rgb(17, 0, 255);
 
 }
