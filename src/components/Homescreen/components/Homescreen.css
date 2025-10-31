@@ -14,7 +14,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    gap: 4rem;
+    gap: 7rem;
 
 }
 
@@ -46,13 +46,24 @@
     padding: 2rem;
 
     color: rgb(11, 0, 108);
-    box-shadow: 0 0 1rem 0.5rem rgb(147, 102, 182);
+    filter: 
+        drop-shadow(0 0 0.5rem rgba(147, 102, 182, 0.8))
+        drop-shadow(0 0 0.5rem rgba(147, 102, 182, 0.8))
+        drop-shadow(0 0 0.5rem rgba(147, 102, 182, 0.8));
 
     background-image: url("../../../images/image 1.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     
+}
+
+.HomeDocPage:hover{
+
+    filter: 
+        drop-shadow(0 0 0.6rem rgba(31, 0, 167, 0.8))
+        drop-shadow(0 0 0.6rem rgba(31, 0, 167, 0.8))
+        drop-shadow(0 0 0.6rem rgba(31, 0, 167, 0.8));
 
 }
 
@@ -70,10 +81,7 @@
 
   gap: 2rem;
 
-  background-color: rgba(84, 115, 255, 0.5);
-
 }
-
 
 .HomeDocPage:hover .Options {
 
@@ -82,7 +90,11 @@
     align-items: center;
     justify-content: center;
 
-    box-shadow: 0 0 1rem 0.5rem rgb(31, 0, 167);
+    background-color: rgba(84, 115, 255, 0.5);
+    mask-image: url("../../../images/image 1.svg");
+    mask-size: cover;
+    mask-repeat: no-repeat;
+
 }
 
 
@@ -131,8 +143,8 @@
     color: white;
     background-color: rgb(0, 30, 201);
 
-    border-bottom: 0.2rem solid rgb(0, 0, 0);
-    border-left: 0.2rem solid rgb(0, 0, 0);
+    border-bottom: 0.3rem solid rgb(0, 0, 0);
+    border-left: 0.3rem solid rgb(0, 0, 0);
     border-right: 0.1rem solid rgb(0, 0, 0);
     border-top: 0.1rem solid rgb(0, 0, 0);
 
