@@ -2,15 +2,16 @@ import { Link } from "react-router-dom";
 import {useState, useRef} from "react";
 import ContentEditable from "react-contenteditable";
 
+
+import MaxMBWarning from "../../ReusedComponents/MaxMBWarning.jsx";
 import DocDeleteWarning from "./DocscreenComponents/DocDeleteWarning.jsx";
 import DocTitleChanger from "./DocscreenComponents/DocTitleChanger.jsx";
 import DocToolBar from "./DocscreenComponents/DocToolBar/DocToolBar.jsx";
 
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
-import {useImportedImages} from "../../../providers/ImportedImagesProvider.jsx";
 
-import { getImageCount } from "../../../helpers/Helpers.js";
+import { MBCalculation } from "../../../helpers/Helpers.js";
 
 
 import "./Docscreen.css";
@@ -19,11 +20,12 @@ function Docscreen (){
 
     const {Documents, setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
-    const {ImportedImages, setImportedImages} = useImportedImages();
 
     const [errorMessage, setErrorMessage] = useState("");
     const [openTitleFlag, setOpenTitleFlag] = useState(false);
     const [openDocDeleteWarningFlag, setOpenDocDeleteWarningFlag] = useState(false);
+    const [openDocMBWarningFlag, setOpenDocMBWarningFlag] = useState(false);
+
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
@@ -31,7 +33,6 @@ function Docscreen (){
         );
 
     const savedSelectionSpotRef = useRef(null);
-    const otherImagesRef = useRef(ImportedImages - getImageCount(currentDocument[0]));
     const editableRef = useRef(null);
     const timeoutRef = useRef(null);
 
@@ -92,58 +93,49 @@ function Docscreen (){
 
         if (!file) return;
 
-        // Check if image limit has been reached:
-        if (otherImagesRef.current + getImageCount(currentDocument[0]) >= 250){
+        try {
 
-            showErrorMessage("Image limit (250) reached! Please delete images in your documents or in trash to clear space.");
+            const compressedBase64 = await compressImage(file, 0.65);
 
-        } else {
+            // Creates an image element for the newly compresseed image:
+            const imgTag = document.createElement("img");
+            imgTag.src = compressedBase64;
 
-            try {
+            let updatedHTML;
 
-                const compressedBase64 = await compressImage(file, 0.65);
+            // Checks if there is a saved selection for image insertion (or else just insert at the end):
+            if (savedSelectionSpotRef.current) {
 
-                // Creates an image element for the newly compresseed image:
-                const imgTag = document.createElement("img");
-                imgTag.src = compressedBase64;
+                // If selection is highlighted text, deletes highlighted text:
+                savedSelectionSpotRef.current.deleteContents();
 
-                let updatedHTML;
+                // Inserts image element at the start of the selection:
+                savedSelectionSpotRef.current.insertNode(imgTag);
 
-                // Checks if there is a saved selection for image insertion (or else just insert at the end):
-                if (savedSelectionSpotRef.current) {
+                // Adjusts the start and end of the selection to the same cursor position (range == 1) after the inserted image node's position: 
+                savedSelectionSpotRef.current.setStartAfter(imgTag);
+                savedSelectionSpotRef.current.setEndAfter(imgTag);
 
-                    // If selection is highlighted text, deletes highlighted text:
-                    savedSelectionSpotRef.current.deleteContents();
+                // Sets the browser to continue with this adjusted selection:
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(savedSelectionSpotRef.current);
 
-                    // Inserts image element at the start of the selection:
-                    savedSelectionSpotRef.current.insertNode(imgTag);
+                // Grabs the updated contenteditable's html with the newly inserted image element:
+                updatedHTML =  editableRef.current.innerHTML;
 
-                    // Adjusts the start and end of the selection to the same cursor position (range == 1) after the inserted image node's position: 
-                    savedSelectionSpotRef.current.setStartAfter(imgTag);
-                    savedSelectionSpotRef.current.setEndAfter(imgTag);
+            } else {
 
-                    // Sets the browser to continue with this adjusted selection:
-                    const sel = window.getSelection();
-                    sel.removeAllRanges();
-                    sel.addRange(savedSelectionSpotRef.current);
-
-                    // Grabs the updated contenteditable's html with the newly inserted image element:
-                    updatedHTML =  editableRef.current.innerHTML;
-
-                } else {
-
-                    updatedHTML = currentDocument[0] + imgTag.outerHTML;
-                }
-
-                handleChange({ target: { value: updatedHTML } });
-
-                setErrorMessage("");
-
-            } catch (err) {
-
-                showErrorMessage(err.message);
-
+                updatedHTML = currentDocument[0] + imgTag.outerHTML;
             }
+
+            handleChange({ target: { value: updatedHTML } });
+
+            setErrorMessage("");
+
+        } catch (err) {
+
+            showErrorMessage(err.message);
 
         }
 
@@ -256,9 +248,103 @@ function Docscreen (){
 
         }
 
-        setImportedImages(otherImagesRef.current + getImageCount(currentDocument[0]));
-
         setActiveDocument(newActiveDoc);
+
+    }
+
+    const handleSaveDoc = () => {
+
+        const currentStorageValue = MBCalculation();
+        if (currentStorageValue >= 4.8){
+
+            setOpenDocMBWarningFlag(true);
+
+        } else {
+
+            saveProgress(0);
+
+        }
+
+    }
+
+    const handleLeaveDoc = (e) => {
+
+        const currentStorageValue = MBCalculation();
+        if (currentStorageValue >= 4.8){
+
+            e.preventDefault();
+            setOpenDocMBWarningFlag(true);
+
+        } else {
+
+            saveProgress(-1);
+
+        }
+
+    }
+
+
+
+    const MBCheckingSingleString = (array) => {
+
+        let bytes = 0;
+        const string = Array.isArray(array) ? array.join('') : array;
+
+        // Match all base64 images inside <img src="data:image/..."> tags
+        const imgRegex = /<img src=\\"data:image\/[a-zA-Z]+;base64,([^"]+)\\"/g;
+
+        // Stops at each location within a key where an image is located to account for the bytes it takes up:
+        let imageValue = imgRegex.exec(string);
+        while (imageValue !== null) {
+
+            bytes += Math.ceil((imageValue[1].length * 3) / 4);
+            imageValue = imgRegex.exec(string);
+
+        }
+
+        // Add any remaining string content's bytes:
+        const stringValue = string.replace(imgRegex, '');
+        bytes += stringValue.length * 2;
+
+        // Convert to MB:
+        const size = (bytes * 2) / (1024 * 1024);
+
+        return size;
+
+    }
+
+
+    const deleteChecking = () => {
+       
+        const newStringMB = MBCheckingSingleString(currentDocument);
+        const currentStorageValue = MBCalculation();
+
+        if (ActiveDocument === -1){
+
+            if (currentStorageValue + newStringMB >= 4.8){
+
+                setOpenDocMBWarningFlag(true);
+
+            } else {
+
+                setOpenDocDeleteWarningFlag(true)
+
+            }
+
+        } else {
+
+            const oldStringMB = MBCheckingSingleString(Documents[ActiveDocument]);
+            if (currentStorageValue - oldStringMB + newStringMB >= 4.8){
+
+                setOpenDocMBWarningFlag(true);
+
+            } else {
+
+                setOpenDocDeleteWarningFlag(true)
+
+            }
+
+        }
 
     }
 
@@ -266,11 +352,15 @@ function Docscreen (){
     return (
 
         <>
+            {openDocMBWarningFlag && 
+            <MaxMBWarning
+                setOpenMBWarningFlag = {setOpenDocMBWarningFlag}
+            />}
+        
             {openDocDeleteWarningFlag &&
             <DocDeleteWarning
                 setOpenDocDeleteWarningFlag = {setOpenDocDeleteWarningFlag}
                 currentDocument={currentDocument}
-                otherImagesRef = {otherImagesRef}
             />}
 
             {openTitleFlag &&
@@ -305,7 +395,7 @@ function Docscreen (){
                         
                     </div>
 
-                    <p className={errorMessage !== "" ? "DocImageErrorSpace" : "DocImageErrorNoneSpace"}>{errorMessage}</p>
+                    <p className="DocImageErrorSpace">{errorMessage}</p>
 
                     <ContentEditable
                         innerRef={editableRef}
@@ -319,9 +409,9 @@ function Docscreen (){
                     />
 
                     <div className = "GeneralButtonsContainer">
-                        <button className = "GeneralButton" onClick = {() => saveProgress(0)}> Save </button>
-                        <Link to="/home" className = "GeneralButton" onClick = {() => saveProgress(-1)}> Save + Exit </Link>
-                        <button className = "GeneralButton" onClick = {() => setOpenDocDeleteWarningFlag(true)}> Delete </button>
+                        <button className = "GeneralButton" onClick = {() => handleSaveDoc()}> Save </button>
+                        <Link to="/home" className = "GeneralButton" onClick = {(e) => handleLeaveDoc(e)}> Save + Exit </Link>
+                        <button className = "GeneralButton" onClick = {() => deleteChecking()}> Delete </button>
                     </div>
 
                 </div>

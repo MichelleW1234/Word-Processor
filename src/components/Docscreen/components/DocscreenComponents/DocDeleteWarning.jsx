@@ -4,34 +4,28 @@ import { Link } from "react-router-dom";
 import {useDocuments} from "../../../../providers/DocumentsProvider.jsx";
 import {useTrash} from "../../../../providers/TrashProvider.jsx";
 import {useActiveDocument} from "../../../../providers/ActiveDocumentProvider.jsx";
-import {useImportedImages} from "../../../../providers/ImportedImagesProvider.jsx";
 
-import { deleteDocument, moveToTrash, getImageCount } from "../../../../helpers/Helpers.js";
+import { moveToTrash } from "../../../../helpers/Helpers.js";
 
 
-function DocDeleteWarning ({setOpenDocDeleteWarningFlag, currentDocument, otherImagesRef}){
+function DocDeleteWarning ({setOpenDocDeleteWarningFlag, currentDocument}){
 
     const {setDocuments} = useDocuments();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
     const {setTrash} = useTrash();
-    const {setImportedImages} = useImportedImages();
 
-    const deleting = () => {
+    const trash = () => {
 
-        setImportedImages(otherImagesRef.current + getImageCount(currentDocument[0]));
-
+        moveToTrash(currentDocument, ActiveDocument, setDocuments, setTrash);
+        
         if (ActiveDocument !== -1){
 
-            deleteDocument(setTrash, setDocuments, ActiveDocument, currentDocument);
             setActiveDocument(-1);
-
-        } else {
-
-            moveToTrash(currentDocument, setTrash);
 
         }
 
     }
+
     
 
     return (
@@ -39,10 +33,10 @@ function DocDeleteWarning ({setOpenDocDeleteWarningFlag, currentDocument, otherI
         <div className = "FullScreenFloatingFlag">
 
             <div className = "FullFlagContainer">
-                <h3>Are you sure you want to move this document to Trash?</h3>
+                <h3>Are you sure you want to move this document to Trash? </h3>
 
                 <div className="FullFlagButtonContainer">
-                    <Link to="/home" className = "FlagContainerButton" onClick = {() => deleting()}> Yes </Link>
+                    <Link to="/home" className = "FlagContainerButton" onClick = {() => trash()}> Yes </Link>
                     <button className = "FlagContainerButton" onClick = {() => setOpenDocDeleteWarningFlag(false)}> No </button>
                 </div>
 

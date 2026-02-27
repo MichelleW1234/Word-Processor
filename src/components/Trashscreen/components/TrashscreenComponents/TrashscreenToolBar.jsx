@@ -1,16 +1,12 @@
 import {useDocuments} from "../../../../providers/DocumentsProvider.jsx";
 import {useTrash} from "../../../../providers/TrashProvider.jsx";
-import {useImportedImages} from "../../../../providers/ImportedImagesProvider.jsx";
-
-import { getImageCount } from "../../../../helpers/Helpers.js";
 
 
 function TrashscreenToolBar ({selected, setSelected}){
 
     const {setDocuments} = useDocuments();
     const {Trash, setTrash} = useTrash();
-    const {setImportedImages} = useImportedImages();
-
+    
 
 
     const restore = () => {
@@ -36,29 +32,15 @@ function TrashscreenToolBar ({selected, setSelected}){
 
     const deletePermanently = () => {
 
-        const selectedTrash = Trash.filter((_, i) => selected.includes(i));
-
         setTrash(prev => {
             return prev.filter((_, i) => !selected.includes(i));
         });
-
-        let deletedImageCount = 0;
-        selectedTrash.forEach(document => {
-            deletedImageCount += getImageCount(document[0]);
-        });
-        setImportedImages(prev => prev - deletedImageCount);
 
         setSelected([]);
 
     }
 
     const emptyTrash = () => {
-
-        let deletedImageCount = 0;
-        Trash.forEach(document => {
-            deletedImageCount += getImageCount(document[0]);
-        });
-        setImportedImages(prev => prev - deletedImageCount);
 
         setTrash([]);
         setSelected([]);
