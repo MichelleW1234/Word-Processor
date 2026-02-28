@@ -47,15 +47,16 @@ export const MBCalculation = () => {
     
     let totalBytes = 0;
 
-    for (let key in localStorage) {
-        if (localStorage.hasOwnProperty(key)) {
+    for (let i = 0; i < localStorage.length; i++) {
+        
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key);
 
-            const value = localStorage[key];
-            const valueBytes = MBSingleStringCalculation(value);
+        const valueBytes = MBSingleStringCalculation(value);
 
-            // Account for key's bytes as well:
-            totalBytes += valueBytes + key.length;
-        }
+        // Account for key's bytes as well:
+        totalBytes += valueBytes + key.length;
+
     }
 
     // Convert to bytes to MB:

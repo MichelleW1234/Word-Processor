@@ -231,7 +231,19 @@ function Docscreen (){
     const saveProgress = (newActiveDoc) => {
 
         const now = new Date();
-        const timeDateString = "Saved at " + now.toLocaleTimeString() + " on " + now.toLocaleDateString();
+        const timeDateString = "Saved at " +
+            now.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true,
+            }) +
+            " on " +
+            now.toLocaleDateString("en-US", {
+                month: "numeric",
+                day: "numeric",
+                year: "numeric",
+            });
         const updatedDateAndTime = [...currentDocument.slice(0, -1), timeDateString];
 
         if (ActiveDocument !== -1){
