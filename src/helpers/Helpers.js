@@ -1,3 +1,6 @@
+import { MBDivisor } from "../components/constants/Constants";
+
+
 export const moveToTrash = (trashDocument, indexToDelete, setDocuments, setTrash) => {
 
     if (indexToDelete !== -1) {
@@ -19,6 +22,42 @@ export const moveToTrash = (trashDocument, indexToDelete, setDocuments, setTrash
 
 
 
+export const MBSingleStringCalculation = (input) => {
+
+    let bytes = 0;
+    let string;
+
+    if (typeof input === "string"){
+
+        string = input;
+
+    } else {
+    
+        string = JSON.stringify(input);
+
+    }
+
+    // Match all base64 images inside <img src="data:image/..."> tags
+    const imgRegex = /<img src=\\"data:image\/[a-zA-Z]+;base64,([^"]+)\\"/g;
+
+    // Stops at each location within a key where an image is located to account for the bytes it takes up:
+    let imageValue = imgRegex.exec(string);
+    while (imageValue !== null) {
+
+        bytes += Math.ceil((imageValue[1].length * 3) / 4);
+        imageValue = imgRegex.exec(string);
+
+    }
+
+    // Add any remaining string content's bytes:
+    const stringValue = string.replace(imgRegex, '');
+    bytes += stringValue.length * 2;
+
+    return bytes;
+
+}
+
+
 export const MBCalculation = () => {
     
     let totalBytes = 0;
@@ -27,32 +66,17 @@ export const MBCalculation = () => {
         if (localStorage.hasOwnProperty(key)) {
 
             const value = localStorage[key];
-            let bytes = 0;
-
-            // Match all base64 images inside <img src="data:image/..."> tags
-            const imgRegex = /<img src=\\"data:image\/[a-zA-Z]+;base64,([^"]+)\\"/g;
-
-            // Stops at each location within a key where an image is located to account for the bytes it takes up:
-            let imageValue = imgRegex.exec(value);
-            while (imageValue !== null) {
-
-                bytes += Math.ceil((imageValue[1].length * 3) / 4);
-                imageValue = imgRegex.exec(value);
-
-            }
-
-            // Add any remaining string content's bytes:
-            const stringValue = value.replace(imgRegex, '');
-            bytes += stringValue.length * 2;
+            const valueBytes = MBSingleStringCalculation(value);
 
             // Account for key's bytes as well:
-            totalBytes += bytes + key.length * 2;
+            totalBytes += valueBytes + key.length * 2;
         }
     }
 
     // Convert to bytes to MB:
-    const size = totalBytes / (1024 * 1024);
+    const size = totalBytes / MBDivisor;
 
+    console.log(size);
     return size;
 
 }

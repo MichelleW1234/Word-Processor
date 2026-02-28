@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import {useState} from "react";
 
-import MaxMBWarning from "../../ReusedComponents/MaxMBWarning.jsx";
+import HomeMaxMBWarning from "./HomescreenComponents/HomeMaxMBWarning.jsx";
 import HomeDeleteWarning from "./HomescreenComponents/HomeDeleteWarning.jsx";
 import HomeNavBar from "./HomescreenComponents/HomeNavbar.jsx";
 
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
-import { MBCalculation } from "../../../helpers/Helpers.js";
+import { MBCalculation, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
+import { MBDivisor, MBLimit, newDoc } from "../../constants/Constants.js";
 
 import "./Homescreen.css";
+
+
 
 function Homescreen (){
 
@@ -24,9 +27,12 @@ function Homescreen (){
     const currentMB = MBCalculation();
 
 
+
     const newDocument = (e) => {
 
-        if (currentMB >= 4.8){
+        const newStringMB = MBSingleStringCalculation(newDoc) / MBDivisor;
+
+        if (currentMB + newStringMB >= MBLimit){
 
             e.preventDefault();
             setOpenHomeMBWarningFlag(true);
@@ -40,7 +46,6 @@ function Homescreen (){
     }
 
 
-
     const deleteWarning = (index) => {
 
         setOpenHomeDeleteWarningFlag(true);
@@ -49,13 +54,14 @@ function Homescreen (){
     }
 
 
+
     return (
 
         <>
 
             {openHomeMBWarningFlag && 
-            <MaxMBWarning
-                setOpenMBWarningFlag = {setOpenHomeMBWarningFlag}
+            <HomeMaxMBWarning
+                setOpenHomeMBWarningFlag = {setOpenHomeMBWarningFlag}
             />}
             
             {openHomeDeleteWarningFlag &&
@@ -69,13 +75,17 @@ function Homescreen (){
 
             <div className = "HomescreenLayout">
         
-                {currentMB >= 4.8 ? (
+                {currentMB >= MBLimit ? (
 
-                    <p className="HomescreenMBWarning"> You have used up the max storage limit of 4.8 MB. Shorten or delete some documents or empty your trash to free up space. </p>
+                    <p className="HomescreenMBWarning"> Max storage limit of {MBLimit} MB reached. Shorten or delete documents or empty your trash to free up space. </p>
+                
+                ) : currentMB >= Math.floor(MBLimit) ? (
+
+                    <p className="HomescreenMBWarning"> Storage almost full: {Math.floor(MBLimit)} MB of {MBLimit} MB used. Shorten or delete documents or empty your trash to free up space. </p>
 
                 ) : (
 
-                    <p className="HomescreenMBWarning"> </p>
+                    <p className="HomescreenMBWarning"></p>
 
                 )}
                     

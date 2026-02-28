@@ -3,7 +3,7 @@ import {useState, useRef} from "react";
 import ContentEditable from "react-contenteditable";
 
 
-import MaxMBWarning from "../../ReusedComponents/MaxMBWarning.jsx";
+import DocMaxMBWarning from "./DocscreenComponents/DocMaxMBWarning.jsx";
 import DocDeleteWarning from "./DocscreenComponents/DocDeleteWarning.jsx";
 import DocTitleChanger from "./DocscreenComponents/DocTitleChanger.jsx";
 import DocToolBar from "./DocscreenComponents/DocToolBar/DocToolBar.jsx";
@@ -11,7 +11,8 @@ import DocToolBar from "./DocscreenComponents/DocToolBar/DocToolBar.jsx";
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
-import { MBCalculation } from "../../../helpers/Helpers.js";
+import { MBCalculation, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
+import { MBDivisor, MBLimit, newDoc } from "../../constants/Constants.js";
 
 
 import "./Docscreen.css";
@@ -29,7 +30,7 @@ function Docscreen (){
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
             ? Documents[ActiveDocument]
-            : ["", "Untitled", "00052", ""]
+            : newDoc
         );
 
     const savedSelectionSpotRef = useRef(null);
@@ -149,7 +150,7 @@ function Docscreen (){
         return new Promise((resolve, reject) => {
 
             // Manually reject image file if file size is too large (to save memory):
-            if (file.size > 3.5 * 1024 * 1024){
+            if (file.size > 3.5 * MBDivisor){
 
                 reject(new Error("File is too large! Maximum size is 3.5 MB."));
                 return;
@@ -255,13 +256,32 @@ function Docscreen (){
     const handleSaveDoc = () => {
 
         const currentStorageValue = MBCalculation();
-        if (currentStorageValue >= 4.8){
+        const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
 
-            setOpenDocMBWarningFlag(true);
+        if (ActiveDocument === -1){
+
+            if (currentStorageValue + newStringMB >= MBLimit){
+
+                setOpenDocMBWarningFlag(true);
+
+            } else {
+
+                saveProgress(0);
+
+            }
 
         } else {
 
-            saveProgress(0);
+            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
+            if (currentStorageValue - oldStringMB + newStringMB >= MBLimit){
+
+                setOpenDocMBWarningFlag(true);
+
+            } else {
+
+                saveProgress(0);
+
+            }
 
         }
 
@@ -270,77 +290,68 @@ function Docscreen (){
     const handleLeaveDoc = (e) => {
 
         const currentStorageValue = MBCalculation();
-        if (currentStorageValue >= 4.8){
-
-            e.preventDefault();
-            setOpenDocMBWarningFlag(true);
-
-        } else {
-
-            saveProgress(-1);
-
-        }
-
-    }
-
-
-
-    const MBCheckingSingleString = (array) => {
-
-        let bytes = 0;
-        const string = Array.isArray(array) ? array.join('') : array;
-
-        // Match all base64 images inside <img src="data:image/..."> tags
-        const imgRegex = /<img src=\\"data:image\/[a-zA-Z]+;base64,([^"]+)\\"/g;
-
-        // Stops at each location within a key where an image is located to account for the bytes it takes up:
-        let imageValue = imgRegex.exec(string);
-        while (imageValue !== null) {
-
-            bytes += Math.ceil((imageValue[1].length * 3) / 4);
-            imageValue = imgRegex.exec(string);
-
-        }
-
-        // Add any remaining string content's bytes:
-        const stringValue = string.replace(imgRegex, '');
-        bytes += stringValue.length * 2;
-
-        // Convert to MB:
-        const size = (bytes * 2) / (1024 * 1024);
-
-        return size;
-
-    }
-
-
-    const deleteChecking = () => {
-       
-        const newStringMB = MBCheckingSingleString(currentDocument);
-        const currentStorageValue = MBCalculation();
+        const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
 
         if (ActiveDocument === -1){
 
-            if (currentStorageValue + newStringMB >= 4.8){
+            if (currentStorageValue + newStringMB >= MBLimit){
 
+                e.preventDefault();
                 setOpenDocMBWarningFlag(true);
 
             } else {
 
-                setOpenDocDeleteWarningFlag(true)
+                saveProgress(-1);
 
             }
 
         } else {
 
-            const oldStringMB = MBCheckingSingleString(Documents[ActiveDocument]);
-            if (currentStorageValue - oldStringMB + newStringMB >= 4.8){
+            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
+            if (currentStorageValue - oldStringMB + newStringMB >= MBLimit){
+
+                e.preventDefault();
+                setOpenDocMBWarningFlag(true);
+
+            } else {
+
+                saveProgress(-1);
+
+            }
+
+        }
+
+    }
+
+
+
+    const deleteChecking = () => {
+       
+        const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
+        const currentStorageValue = MBCalculation();
+
+        if (ActiveDocument === -1){
+
+            if (currentStorageValue + newStringMB >= MBLimit){
 
                 setOpenDocMBWarningFlag(true);
 
             } else {
 
-                setOpenDocDeleteWarningFlag(true)
+                setOpenDocDeleteWarningFlag(true);
+
+            }
+
+        } else {
+
+            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
+            if (currentStorageValue - oldStringMB + newStringMB >= MBLimit){
+
+                setOpenDocMBWarningFlag(true);
+
+            } else {
+
+                setOpenDocDeleteWarningFlag(true);
 
             }
 
@@ -353,8 +364,8 @@ function Docscreen (){
 
         <>
             {openDocMBWarningFlag && 
-            <MaxMBWarning
-                setOpenMBWarningFlag = {setOpenDocMBWarningFlag}
+            <DocMaxMBWarning
+                setOpenDocMBWarningFlag = {setOpenDocMBWarningFlag}
             />}
         
             {openDocDeleteWarningFlag &&
