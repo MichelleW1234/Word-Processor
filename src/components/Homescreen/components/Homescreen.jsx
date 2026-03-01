@@ -82,7 +82,7 @@ function Homescreen (){
                 
                 ) : !MBLimitNotApproached ? (
 
-                    <p className="HomescreenMBWarning"> Storage almost full: 0.5 MB remaining. Shorten or delete documents or empty your trash to free up space. </p>
+                    <p className="HomescreenMBWarning"> Storage almost full: &lt;0.5 MB remaining. Shorten or delete documents or empty your trash to free up space. </p>
 
                 ) : (
 
