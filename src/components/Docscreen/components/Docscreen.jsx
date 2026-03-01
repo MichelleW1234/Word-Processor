@@ -299,6 +299,10 @@ function Docscreen (){
 
                 }
 
+            } else {
+
+                saveProgress(0);
+
             }
 
         }
@@ -340,6 +344,10 @@ function Docscreen (){
                     saveProgress(-1);
 
                 }
+
+            } else {
+
+                saveProgress(-1);
 
             }
 
