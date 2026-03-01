@@ -26,6 +26,8 @@ export const moveToTrash = (trashDocument, indexToDelete, setDocuments, setTrash
 
 export const MBAdditionChecker = (MBAdded) => {
 
+    console.log("Trying to add: " + MBAdded);
+
     try {
 
         const dataSize = Math.floor(MBAdded * MBDivisor);
@@ -75,30 +77,3 @@ export const MBSingleStringCalculation = (input) => {
     return size;
 
 }
-
-
-/*
-export const MBCalculation = () => {
-    
-    let totalBytes = 0;
-
-    for (let i = 0; i < localStorage.length; i++) {
-        
-        const key = localStorage.key(i);
-        const value = localStorage.getItem(key);
-
-        const valueBytes = MBSingleStringCalculation(value);
-
-        // Account for key's bytes as well:
-        totalBytes += valueBytes + key.length*2;
-
-    }
-
-    // Convert to bytes to MB:
-    const size = totalBytes / MBDivisor;
-
-    console.log(size);
-    return size;
-
-}
-*/

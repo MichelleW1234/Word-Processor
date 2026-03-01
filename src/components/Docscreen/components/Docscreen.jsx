@@ -245,6 +245,7 @@ function Docscreen (){
                 year: "numeric",
             });
         const updatedDateAndTime = [...currentDocument.slice(0, -1), timeDateString];
+        setCurrentDocument(updatedDateAndTime);
 
         if (ActiveDocument !== -1){
 
