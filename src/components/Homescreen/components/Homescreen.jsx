@@ -31,7 +31,7 @@ function Homescreen (){
 
     const newDocument = (e) => {
 
-        const newStringMB = MBSingleStringCalculation(newDoc) / MBDivisor;
+        const newStringMB = MBSingleStringCalculation(newDoc);
 
         if (MBAdditionChecker(newStringMB) === false){
 

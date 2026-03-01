@@ -270,7 +270,7 @@ function Docscreen (){
 
     const handleSaveDoc = () => {
 
-        const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
+        const newStringMB = MBSingleStringCalculation(currentDocument);
 
         if (ActiveDocument === -1){
 
@@ -286,9 +286,11 @@ function Docscreen (){
 
         } else {
 
-            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
+            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]);
 
             if (oldStringMB < newStringMB){
+
+                console.log(newStringMB - oldStringMB);
 
                 if (MBAdditionChecker(newStringMB - oldStringMB) === false){
 
@@ -314,7 +316,7 @@ function Docscreen (){
 
     const handleLeaveDoc = (e) => {
 
-        const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
+        const newStringMB = MBSingleStringCalculation(currentDocument);
 
         if (ActiveDocument === -1){
 
@@ -331,7 +333,7 @@ function Docscreen (){
 
         } else {
 
-            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
+            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]);
 
             if (oldStringMB < newStringMB){
 
@@ -360,7 +362,7 @@ function Docscreen (){
 
     const deleteChecking = () => {
        
-        const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
+        const newStringMB = MBSingleStringCalculation(currentDocument);
 
         if (ActiveDocument === -1){
 
@@ -376,7 +378,7 @@ function Docscreen (){
 
         } else {
 
-            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
+            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]);
 
             if (oldStringMB < newStringMB){
 
