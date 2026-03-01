@@ -1,3 +1,3 @@
-export const newDoc = ["", "Untitled", "00052", "~ This document has not been saved ~"];
+export const newDoc = ["", "Untitled", "00052", ""];
 
 export const MBDivisor = 1048576;
