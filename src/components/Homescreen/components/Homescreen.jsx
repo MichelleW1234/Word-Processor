@@ -8,8 +8,8 @@ import HomeNavBar from "./HomescreenComponents/HomeNavbar.jsx";
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
-import { MBCalculation, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
-import { MBDivisor, MBLimit, newDoc } from "../../constants/Constants.js";
+import { MBAdditionChecker, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
+import { MBDivisor, newDoc } from "../../constants/Constants.js";
 
 import "./Homescreen.css";
 
@@ -24,7 +24,8 @@ function Homescreen (){
     const [openHomeDeleteWarningFlag, setOpenHomeDeleteWarningFlag] = useState(false);
     const [indexToDelete, setIndexToDelete] = useState(-1);
 
-    const currentMB = MBCalculation();
+    const MBLimitNotReached = MBAdditionChecker(0);
+    const MBLimitNotApproached = MBAdditionChecker(0.5);
 
 
 
@@ -32,7 +33,7 @@ function Homescreen (){
 
         const newStringMB = MBSingleStringCalculation(newDoc) / MBDivisor;
 
-        if (currentMB + newStringMB >= MBLimit){
+        if (MBAdditionChecker(newStringMB) === false){
 
             e.preventDefault();
             setOpenHomeMBWarningFlag(true);
@@ -75,13 +76,13 @@ function Homescreen (){
 
             <div className = "HomescreenLayout">
         
-                {currentMB >= MBLimit ? (
+                {!MBLimitNotReached ? (
 
-                    <p className="HomescreenMBWarning"> Max storage limit of {MBLimit} MB reached. Shorten or delete documents or empty your trash to free up space. </p>
+                    <p className="HomescreenMBWarning"> Max storage limit reached. Shorten or delete documents or empty your trash to free up space. </p>
                 
-                ) : currentMB >= Math.floor(MBLimit) ? (
+                ) : !MBLimitNotApproached ? (
 
-                    <p className="HomescreenMBWarning"> Storage almost full: {Math.floor(MBLimit)} MB of {MBLimit} MB used. Shorten or delete documents or empty your trash to free up space. </p>
+                    <p className="HomescreenMBWarning"> Storage almost full: 0.5 MB remaining. Shorten or delete documents or empty your trash to free up space. </p>
 
                 ) : (
 

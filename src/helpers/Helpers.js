@@ -22,8 +22,40 @@ export const moveToTrash = (trashDocument, indexToDelete, setDocuments, setTrash
 
 
 
-export const MBSingleStringCalculation = (input) => {
+// MB checking:
 
+export const MBAdditionChecker = (MBAdded) => {
+
+    try {
+
+        const dataSize = Math.floor(MBAdded * MBDivisor);
+        const bufferSize = Math.floor(0.2 * MBDivisor);
+        const testData = "0".repeat(bufferSize + dataSize);
+
+        localStorage.setItem("test", testData);
+
+    } catch (error) {
+
+        console.log("unsafe");
+
+        return false;
+
+    } finally {
+
+        localStorage.removeItem("test");
+
+    }
+
+    console.log("safe");
+
+    return true;
+
+
+}
+
+
+export const MBSingleStringCalculation = (input) => {
+    
     let stringValue;
 
     if (typeof input === "string"){
@@ -36,13 +68,16 @@ export const MBSingleStringCalculation = (input) => {
 
     }
 
-    const bytes = stringValue.length;
+    const bytes = stringValue.length*2;
 
-    return bytes;
+    const size = bytes / MBDivisor;
+
+    return size;
 
 }
 
 
+/*
 export const MBCalculation = () => {
     
     let totalBytes = 0;
@@ -55,7 +90,7 @@ export const MBCalculation = () => {
         const valueBytes = MBSingleStringCalculation(value);
 
         // Account for key's bytes as well:
-        totalBytes += valueBytes + key.length;
+        totalBytes += valueBytes + key.length*2;
 
     }
 
@@ -66,3 +101,4 @@ export const MBCalculation = () => {
     return size;
 
 }
+*/

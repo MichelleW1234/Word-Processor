@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {useState, useRef} from "react";
 import ContentEditable from "react-contenteditable";
 
-
 import DocMaxMBWarning from "./DocscreenComponents/DocMaxMBWarning.jsx";
 import DocDeleteWarning from "./DocscreenComponents/DocDeleteWarning.jsx";
 import DocTitleChanger from "./DocscreenComponents/DocTitleChanger.jsx";
@@ -11,11 +10,12 @@ import DocToolBar from "./DocscreenComponents/DocToolBar/DocToolBar.jsx";
 import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
-import { MBCalculation, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
-import { MBDivisor, MBLimit, newDoc } from "../../constants/Constants.js";
-
+import { MBAdditionChecker, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
+import { MBDivisor, newDoc } from "../../constants/Constants.js";
 
 import "./Docscreen.css";
+
+
 
 function Docscreen (){
 
@@ -265,14 +265,15 @@ function Docscreen (){
 
     }
 
+
+
     const handleSaveDoc = () => {
 
-        const currentStorageValue = MBCalculation();
         const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
 
         if (ActiveDocument === -1){
 
-            if (currentStorageValue + newStringMB >= MBLimit){
+            if (MBAdditionChecker(newStringMB) === false){
 
                 setOpenDocMBWarningFlag(true);
 
@@ -285,13 +286,18 @@ function Docscreen (){
         } else {
 
             const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
-            if (currentStorageValue - oldStringMB + newStringMB >= MBLimit){
 
-                setOpenDocMBWarningFlag(true);
+            if (oldStringMB < newStringMB){
 
-            } else {
+                if (MBAdditionChecker(newStringMB - oldStringMB) === false){
 
-                saveProgress(0);
+                    setOpenDocMBWarningFlag(true);
+
+                } else {
+
+                    saveProgress(0);
+
+                }
 
             }
 
@@ -299,14 +305,15 @@ function Docscreen (){
 
     }
 
+
+
     const handleLeaveDoc = (e) => {
 
-        const currentStorageValue = MBCalculation();
         const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
 
         if (ActiveDocument === -1){
 
-            if (currentStorageValue + newStringMB >= MBLimit){
+            if (MBAdditionChecker(newStringMB) === false){
 
                 e.preventDefault();
                 setOpenDocMBWarningFlag(true);
@@ -320,14 +327,19 @@ function Docscreen (){
         } else {
 
             const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
-            if (currentStorageValue - oldStringMB + newStringMB >= MBLimit){
 
-                e.preventDefault();
-                setOpenDocMBWarningFlag(true);
+            if (oldStringMB < newStringMB){
 
-            } else {
+                if (MBAdditionChecker(newStringMB - oldStringMB) === false){
 
-                saveProgress(-1);
+                    e.preventDefault();
+                    setOpenDocMBWarningFlag(true);
+
+                } else {
+
+                    saveProgress(-1);
+
+                }
 
             }
 
@@ -340,11 +352,10 @@ function Docscreen (){
     const deleteChecking = () => {
        
         const newStringMB = MBSingleStringCalculation(currentDocument) / MBDivisor;
-        const currentStorageValue = MBCalculation();
 
         if (ActiveDocument === -1){
 
-            if (currentStorageValue + newStringMB >= MBLimit){
+            if (MBAdditionChecker(newStringMB) === false){
 
                 setOpenDocMBWarningFlag(true);
 
@@ -357,9 +368,18 @@ function Docscreen (){
         } else {
 
             const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]) / MBDivisor;
-            if (currentStorageValue - oldStringMB + newStringMB >= MBLimit){
 
-                setOpenDocMBWarningFlag(true);
+            if (oldStringMB < newStringMB){
+
+                if (MBAdditionChecker(newStringMB - oldStringMB) === false){
+
+                    setOpenDocMBWarningFlag(true);
+
+                } else {
+
+                    setOpenDocDeleteWarningFlag(true);
+
+                }
 
             } else {
 
