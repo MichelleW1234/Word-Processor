@@ -10,10 +10,22 @@ export function FullDocumentDictionaryProvider({ children }) {
 
   const [FullDocumentDictionary, setFullDocumentDictionary] = useState(() => {
     try {
+
+      const storedDocsRaw = localStorage.getItem("Documents");
+      const storedDocs = storedDocsRaw ? JSON.parse(storedDocsRaw) : [];
+
+
       const stored = JSON.parse(localStorage.getItem("FullDocumentDictionary"));
       return stored && typeof stored === "object"
           ? {
-              "Documents": Array.isArray(stored["Documents"]) ? stored["Documents"] : [],
+              //"Documents": Array.isArray(stored["Documents"]) ? stored["Documents"] : [],
+
+              "Documents": [
+                // Start with the existing FullDocumentDictionary Documents
+                ...(Array.isArray(stored["Documents"]) ? stored["Documents"] : []),
+                // Then add any documents from the separate Documents key
+                ...(Array.isArray(storedDocs) ? storedDocs : [])
+              ],
               "Trash": Array.isArray(stored["Trash"]) ? stored["Trash"] : [],
           }
           : { "Documents": [], "Trash": [] };
@@ -26,15 +38,6 @@ export function FullDocumentDictionaryProvider({ children }) {
     localStorage.setItem("FullDocumentDictionary", JSON.stringify(FullDocumentDictionary));
   }, [FullDocumentDictionary]);
 
-  /*
-  const setDocuments = (newDocuments) => {
-    setStorageData((prev) => ({ ...prev, Documents: newDocuments }));
-  };
-
-  const setTrash = (newTrash) => {
-    setStorageData((prev) => ({ ...prev, Trash: newTrash }));
-  };
-  */
 
   return (
     <FullDocumentDictionaryContext.Provider value={{ FullDocumentDictionary, setFullDocumentDictionary }}>
