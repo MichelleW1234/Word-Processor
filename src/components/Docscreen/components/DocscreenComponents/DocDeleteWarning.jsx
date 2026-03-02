@@ -1,8 +1,7 @@
 
 import { Link } from "react-router-dom";
 
-import {useDocuments} from "../../../../providers/DocumentsProvider.jsx";
-import {useTrash} from "../../../../providers/TrashProvider.jsx";
+import {useFullDocumentDictionary} from "../../../../providers/FullDocumentDictionaryProvider.jsx";
 import {useActiveDocument} from "../../../../providers/ActiveDocumentProvider.jsx";
 
 import { moveToTrash } from "../../../../helpers/Helpers.js";
@@ -10,13 +9,14 @@ import { moveToTrash } from "../../../../helpers/Helpers.js";
 
 function DocDeleteWarning ({setOpenDocDeleteWarningFlag, currentDocument}){
 
-    const {setDocuments} = useDocuments();
+    const {FullDocumentDictionary, setFullDocumentDictionary} = useFullDocumentDictionary();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
-    const {setTrash} = useTrash();
+
+
 
     const trash = () => {
 
-        moveToTrash(currentDocument, ActiveDocument, setDocuments, setTrash);
+        moveToTrash(currentDocument, ActiveDocument, FullDocumentDictionary, setFullDocumentDictionary);
         
         if (ActiveDocument !== -1){
 

@@ -5,11 +5,12 @@ import HomeMaxMBWarning from "./HomescreenComponents/HomeMaxMBWarning.jsx";
 import HomeDeleteWarning from "./HomescreenComponents/HomeDeleteWarning.jsx";
 import HomeNavBar from "./HomescreenComponents/HomeNavbar.jsx";
 
-import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
+import {useFullDocumentDictionary} from "../../../providers/FullDocumentDictionaryProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
+
 import { MBAdditionChecker, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
-import { MBDivisor, newDoc } from "../../constants/Constants.js";
+import { newDoc } from "../../constants/Constants.js";
 
 import "./Homescreen.css";
 
@@ -17,7 +18,7 @@ import "./Homescreen.css";
 
 function Homescreen (){
 
-    const {Documents} = useDocuments();
+    const {FullDocumentDictionary} = useFullDocumentDictionary();
     const {setActiveDocument} = useActiveDocument();
 
     const [openHomeMBWarningFlag, setOpenHomeMBWarningFlag] = useState(false);
@@ -93,10 +94,10 @@ function Homescreen (){
                 <div className = "HomescreenDocPagesContainer">
                     
                     <Link to="/document" className = "HomeDocPageNew" onClick = {(e) => newDocument(e)}> + </Link>
-                    {Documents.map((___, index) => {
+                    {FullDocumentDictionary["Documents"].map((___, index) => {
 
-                        const finalTitle = Documents[index][1].length > 30 ? Documents[index][1].slice(0, 30) + "..." 
-                                                                        : Documents[index][1];
+                        const finalTitle = FullDocumentDictionary["Documents"][index][1].length > 30 ? FullDocumentDictionary["Documents"][index][1].slice(0, 30) + "..." 
+                                                                        : FullDocumentDictionary["Documents"][index][1];
                                         
                         return (
                             <div className = "HomeDocContainer" key={index}>
@@ -107,11 +108,12 @@ function Homescreen (){
                                         <button className = "HomeDocButton" onClick = {() => deleteWarning(index)}> Delete </button>
                                     </div>
                                 </div>
-                                <p className = "HomeDocDateAndTime">{Documents[index][3]}</p>
+                                <p className = "HomeDocDateAndTime">{FullDocumentDictionary["Documents"][index][3]}</p>
                             </div>
                         )
                     })}
                 </div>
+
             </div>
         </>
 

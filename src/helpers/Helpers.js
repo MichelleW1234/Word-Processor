@@ -1,24 +1,29 @@
 import { MBDivisor } from "../components/constants/Constants";
 
 
-export const moveToTrash = (trashDocument, indexToDelete, setDocuments, setTrash) => {
-
+export const moveToTrash = (trashDocument, indexToDelete, FullDocumentDictionary, setFullDocumentDictionary) => {
+    
+    const updatedDocumentDict = {
+        "Documents": FullDocumentDictionary["Documents"].map(doc => [...doc]),
+        "Trash": FullDocumentDictionary["Trash"].map(doc => [...doc]),
+    };
+    
     if (indexToDelete !== -1) {
 
-        setDocuments(prev => {
-            return prev.filter((_, i) => i !== indexToDelete);
-        });
+        updatedDocumentDict["Documents"] = updatedDocumentDict["Documents"].filter(
+            (_, i) => i !== indexToDelete
+        );
 
     }
 
     trashDocument[3] = "Document Restored";
 
-    setTrash( prev => {
-        let newTrash = [trashDocument, ...prev];
-        return newTrash;
-    });
+    updatedDocumentDict["Trash"] = [trashDocument, ...updatedDocumentDict["Trash"]];
+
+    setFullDocumentDictionary(updatedDocumentDict);
 
 }
+
 
 
 
@@ -30,8 +35,8 @@ export const MBAdditionChecker = (MBAdded) => {
 
     try {
 
-        const dataSize = Math.floor(MBAdded * MBDivisor);
-        const bufferSize = Math.floor(0.2 * MBDivisor);
+        const dataSize = MBAdded * MBDivisor;
+        const bufferSize = 0.2 * MBDivisor;
         const testData = "0".repeat(bufferSize + dataSize);
 
         localStorage.setItem("test", testData);
@@ -70,8 +75,7 @@ export const MBSingleStringCalculation = (input) => {
 
     }
 
-    const bytes = stringValue.length*2;
-
+    const bytes = new Blob([stringValue]).size;
     const size = bytes / MBDivisor;
 
     return size;

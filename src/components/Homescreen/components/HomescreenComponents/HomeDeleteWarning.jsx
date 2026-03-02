@@ -1,17 +1,17 @@
-import {useDocuments} from "../../../../providers/DocumentsProvider.jsx";
-import {useTrash} from "../../../../providers/TrashProvider.jsx";
+import {useFullDocumentDictionary} from "../../../../providers/FullDocumentDictionaryProvider.jsx";
 
 import { moveToTrash } from "../../../../helpers/Helpers.js";
 
 
 function HomeDeleteWarning ({setOpenHomeDeleteWarningFlag, indexToDelete, setIndexToDelete}){
 
-    const {Documents, setDocuments} = useDocuments();
-    const {setTrash} = useTrash();
+    const {FullDocumentDictionary, setFullDocumentDictionary} = useFullDocumentDictionary();
     
+    
+
     const trash = () => {
 
-        moveToTrash(Documents[indexToDelete], indexToDelete, setDocuments, setTrash);
+        moveToTrash(FullDocumentDictionary["Documents"][indexToDelete], indexToDelete, FullDocumentDictionary, setFullDocumentDictionary);
         setIndexToDelete(-1);
         setOpenHomeDeleteWarningFlag(false);
 
@@ -24,6 +24,8 @@ function HomeDeleteWarning ({setOpenHomeDeleteWarningFlag, indexToDelete, setInd
         setOpenHomeDeleteWarningFlag(false);
 
     }
+
+
 
     return (
 

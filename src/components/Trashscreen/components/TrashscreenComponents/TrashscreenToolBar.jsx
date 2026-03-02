@@ -1,30 +1,30 @@
-import {useDocuments} from "../../../../providers/DocumentsProvider.jsx";
-import {useTrash} from "../../../../providers/TrashProvider.jsx";
+import {useFullDocumentDictionary} from "../../../../providers/FullDocumentDictionaryProvider.jsx";
 
 
 function TrashscreenToolBar ({selected, setSelected}){
 
-    const {setDocuments} = useDocuments();
-    const {Trash, setTrash} = useTrash();
+    const {FullDocumentDictionary, setFullDocumentDictionary} = useFullDocumentDictionary();
     
 
 
     const restore = () => {
+
+        const updatedDocumentDict = {
+            "Documents": FullDocumentDictionary["Documents"].map(doc => [...doc]),
+            "Trash": FullDocumentDictionary["Trash"].map(doc => [...doc]),
+        };
     
-        setTrash(prev => {
-            return prev.filter((_, i) => !selected.includes(i));
-        });
+        updatedDocumentDict["Trash"] = updatedDocumentDict["Trash"].filter(
+            (_, i) => !selected.includes(i)
+        );
     
-        const restoredDocuments = Trash.filter((_, i) =>
+        const restoredDocuments = FullDocumentDictionary["Trash"].filter((_, i) =>
             selected.includes(i)
         );
 
-        setDocuments(prev => {
+        updatedDocumentDict["Documents"] = [...updatedDocumentDict["Documents"], ...restoredDocuments];
 
-            let updatedDocs = [...prev, ...restoredDocuments];
-            return updatedDocs;
-
-        });
+        setFullDocumentDictionary(updatedDocumentDict);
 
         setSelected([]);
 
@@ -32,9 +32,16 @@ function TrashscreenToolBar ({selected, setSelected}){
 
     const deletePermanently = () => {
 
-        setTrash(prev => {
-            return prev.filter((_, i) => !selected.includes(i));
-        });
+        const updatedDocumentDict = {
+            "Documents": [...FullDocumentDictionary["Documents"]],
+            "Trash": FullDocumentDictionary["Trash"].map(doc => [...doc]),
+        };
+
+        updatedDocumentDict["Trash"] = updatedDocumentDict["Trash"].filter(
+            (_, i) => !selected.includes(i)
+        );
+
+        setFullDocumentDictionary(updatedDocumentDict);
 
         setSelected([]);
 
@@ -42,7 +49,13 @@ function TrashscreenToolBar ({selected, setSelected}){
 
     const emptyTrash = () => {
 
-        setTrash([]);
+        const updatedDocumentDict = {
+            "Documents": [...FullDocumentDictionary["Documents"]],
+            "Trash": [],
+        };
+
+        setFullDocumentDictionary(updatedDocumentDict);
+
         setSelected([]);
 
     }
@@ -69,7 +82,7 @@ function TrashscreenToolBar ({selected, setSelected}){
 
             )}
 
-            <button className = {Trash.length > 0 ? "NavBarButton" : "NavBarButtonPlaceHolder"}  onClick = {() => emptyTrash()}> Empty Trash </button>
+            <button className = {FullDocumentDictionary["Trash"].length > 0 ? "NavBarButton" : "NavBarButtonPlaceHolder"}  onClick = {() => emptyTrash()}> Empty Trash </button>
 
         </div>
 

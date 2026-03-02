@@ -7,7 +7,7 @@ import DocDeleteWarning from "./DocscreenComponents/DocDeleteWarning.jsx";
 import DocTitleChanger from "./DocscreenComponents/DocTitleChanger.jsx";
 import DocToolBar from "./DocscreenComponents/DocToolBar/DocToolBar.jsx";
 
-import {useDocuments} from "../../../providers/DocumentsProvider.jsx";
+import {useFullDocumentDictionary} from "../../../providers/FullDocumentDictionaryProvider.jsx";
 import {useActiveDocument} from "../../../providers/ActiveDocumentProvider.jsx";
 
 import { MBAdditionChecker, MBSingleStringCalculation } from "../../../helpers/Helpers.js";
@@ -19,7 +19,7 @@ import "./Docscreen.css";
 
 function Docscreen (){
 
-    const {Documents, setDocuments} = useDocuments();
+    const {FullDocumentDictionary, setFullDocumentDictionary} = useFullDocumentDictionary();
     const {ActiveDocument, setActiveDocument} = useActiveDocument();
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -29,7 +29,7 @@ function Docscreen (){
 
     const [currentDocument, setCurrentDocument] = useState(
         ActiveDocument !== -1 
-            ? Documents[ActiveDocument]
+            ? FullDocumentDictionary["Documents"][ActiveDocument]
             : newDoc
         );
 
@@ -247,18 +247,24 @@ function Docscreen (){
         const updatedDateAndTime = [...currentDocument.slice(0, -1), timeDateString];
         setCurrentDocument(updatedDateAndTime);
 
+        const updatedDocumentDict = {
+            "Documents": FullDocumentDictionary["Documents"].map(doc => [...doc]),
+            "Trash": [...FullDocumentDictionary["Trash"]],
+        };
+
         if (ActiveDocument !== -1){
 
-            let updatedDocs = [...Documents];
-            updatedDocs[ActiveDocument] = updatedDateAndTime;
+            updatedDocumentDict["Documents"][ActiveDocument] = updatedDateAndTime;
 
-            const [updatedDoc] = updatedDocs.splice(ActiveDocument, 1);
+            const [updatedDoc] = updatedDocumentDict["Documents"].splice(ActiveDocument, 1);
 
-            setDocuments([updatedDoc, ...updatedDocs]);
+            updatedDocumentDict["Documents"] = [updatedDoc, ...updatedDocumentDict["Documents"]];
+            setFullDocumentDictionary(updatedDocumentDict);
 
         } else {
 
-            setDocuments(prev => [updatedDateAndTime, ...prev]);
+            updatedDocumentDict["Documents"] = [updatedDateAndTime, ...updatedDocumentDict["Documents"]];
+            setFullDocumentDictionary(updatedDocumentDict);
 
         }
 
@@ -286,11 +292,9 @@ function Docscreen (){
 
         } else {
 
-            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]);
+            const oldStringMB = MBSingleStringCalculation(FullDocumentDictionary["Documents"][ActiveDocument]);
 
             if (oldStringMB < newStringMB){
-
-                console.log(newStringMB - oldStringMB);
 
                 if (MBAdditionChecker(newStringMB - oldStringMB) === false){
 
@@ -333,7 +337,7 @@ function Docscreen (){
 
         } else {
 
-            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]);
+            const oldStringMB = MBSingleStringCalculation(FullDocumentDictionary["Documents"][ActiveDocument]);
 
             if (oldStringMB < newStringMB){
 
@@ -378,7 +382,7 @@ function Docscreen (){
 
         } else {
 
-            const oldStringMB = MBSingleStringCalculation(Documents[ActiveDocument]);
+            const oldStringMB = MBSingleStringCalculation(FullDocumentDictionary["Documents"][ActiveDocument]);
 
             if (oldStringMB < newStringMB){
 
