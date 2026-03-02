@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import {useState} from "react";
 
-import {useTrash} from "../../../providers/TrashProvider.jsx";
+import {useFullDocumentDictionary} from "../../../providers/FullDocumentDictionaryProvider.jsx";
 
 import TrashscreenToolBar from "./TrashscreenComponents/TrashscreenToolBar.jsx";
 
@@ -9,8 +9,8 @@ import "./Trashscreen.css";
 
 function Trashscreen (){
 
-    const {Trash} = useTrash();
-
+    const {FullDocumentDictionary} = useFullDocumentDictionary();
+    
     const [selected, setSelected] = useState([]);
     
 
@@ -41,16 +41,16 @@ function Trashscreen (){
             <div className = "TrashscreenLayout">
                 <div className = "TrashOptionsContainer">
 
-                    {Trash.length == 0 ? (
+                    {FullDocumentDictionary["Trash"].length == 0 ? (
 
                         <h1 className = "TrashEmptyMessage">Trash is empty.</h1>
                     
                     ): (
 
-                        Trash.map((___, index) => {
+                        FullDocumentDictionary["Trash"].map((___, index) => {
 
-                            const finalTitle = Trash[index][1].length > 30 ? Trash[index][1].slice(0, 30) + "..." 
-                                : Trash[index][1];
+                            const finalTitle = FullDocumentDictionary["Trash"][index][1].length > 30 ? FullDocumentDictionary["Trash"][index][1].slice(0, 30) + "..." 
+                                : FullDocumentDictionary["Trash"][index][1];
 
                             return (
 

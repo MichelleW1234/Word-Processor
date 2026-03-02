@@ -1,28 +1,31 @@
-import {useDocuments} from "../../../../providers/DocumentsProvider.jsx";
-import {useTrash} from "../../../../providers/TrashProvider.jsx";
+import {useFullDocumentDictionary} from "../../../../providers/FullDocumentDictionaryProvider.jsx";
 
-import { deleteDocument } from "../../../../helpers/Helpers.js";
+import { moveToTrash } from "../../../../helpers/Helpers.js";
 
 
 function HomeDeleteWarning ({setOpenHomeDeleteWarningFlag, indexToDelete, setIndexToDelete}){
 
-    const {Documents, setDocuments} = useDocuments();
-    const {setTrash} = useTrash();
+    const {FullDocumentDictionary, setFullDocumentDictionary} = useFullDocumentDictionary();
     
-    const yesDelete = () => {
+    
 
-        deleteDocument(setTrash, setDocuments, indexToDelete, Documents[indexToDelete]);
+    const trash = () => {
+
+        moveToTrash(FullDocumentDictionary["Documents"][indexToDelete], indexToDelete, FullDocumentDictionary, setFullDocumentDictionary);
         setIndexToDelete(-1);
         setOpenHomeDeleteWarningFlag(false);
 
     }
 
-    const noDelete = () => {
+
+    const noTrash = () => {
 
         setIndexToDelete(-1);
         setOpenHomeDeleteWarningFlag(false);
 
     }
+
+
 
     return (
 
@@ -32,8 +35,8 @@ function HomeDeleteWarning ({setOpenHomeDeleteWarningFlag, indexToDelete, setInd
                 <h3>Are you sure you want to move this document to Trash?</h3>
 
                 <div className="FullFlagButtonContainer">
-                    <button className = "FlagContainerButton" onClick = {() => yesDelete()}> Yes </button>
-                    <button className = "FlagContainerButton" onClick = {() => noDelete()}> No </button>
+                    <button className = "FlagContainerButton" onClick = {() => trash()}> Yes </button>
+                    <button className = "FlagContainerButton" onClick = {() => noTrash()}> No </button>
                 </div>
 
             </div>

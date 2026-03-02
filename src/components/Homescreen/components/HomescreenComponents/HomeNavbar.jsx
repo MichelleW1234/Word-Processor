@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import {useState, useRef} from "react";
 import ContentEditable from "react-contenteditable";
 
-import {useDocuments} from "../../../../providers/DocumentsProvider.jsx";
+import {useFullDocumentDictionary} from "../../../../providers/FullDocumentDictionaryProvider.jsx";
 import { useActiveDocument } from "../../../../providers/ActiveDocumentProvider.jsx";
 
 import "./HomeNavbar.css";
@@ -10,11 +10,11 @@ import "./HomeNavbar.css";
 
 function HomeNavBar (){
 
-    const {Documents} = useDocuments();
+    const {FullDocumentDictionary} = useFullDocumentDictionary();
     const {setActiveDocument} = useActiveDocument();
 
     const [titleLookup, setTitleLookup] = useState("");
-    const [matchingTitles, setMatchingTitles] = useState([])
+    const [matchingDocuments, setMatchingDocuments] = useState([])
     const [barIsActive, setBarIsActive] = useState(false);
 
     const editableRef = useRef(null);
@@ -34,19 +34,20 @@ function HomeNavBar (){
     const findTitles = () => {
 
         setBarIsActive(true);
-        const allDocTitles = Documents.map(innerArray => innerArray[1]);
-        const filteredTitles = allDocTitles.filter(el => el.toLowerCase().includes(titleLookup.toLowerCase()));
-        setMatchingTitles(filteredTitles);
 
-    }
+        const filteredDocuments = [];
 
-    const getDocument = (documentTitle) => {
+        for (let i = 0; i<FullDocumentDictionary["Documents"].length; i++){
 
-        const index = Documents.findIndex(innerArray => 
-            innerArray.includes(documentTitle)
-        );
+            if (FullDocumentDictionary["Documents"][i][1].toLowerCase().includes(titleLookup.toLowerCase())){
 
-        setActiveDocument(index);
+                filteredDocuments.push(i);
+
+            }
+
+        }
+
+        setMatchingDocuments(filteredDocuments);
 
     }
 
@@ -55,7 +56,7 @@ function HomeNavBar (){
 
         setBarIsActive(false);
         setTitleLookup("");
-        setMatchingTitles([]);
+        setMatchingDocuments([]);
 
     }
 
@@ -78,7 +79,7 @@ function HomeNavBar (){
                     className="HomeNavBarLookup"
                 />
 
-                {Documents.length > 0 ? (
+                {FullDocumentDictionary["Documents"].length > 0 ? (
 
                     <button className="NavBarButton" onClick = {() => findTitles()}> Find Document </button>
 
@@ -97,19 +98,29 @@ function HomeNavBar (){
                 <div className = "HomeNavBarSuggestionsFlag">
                     <div className="HomeNavBarSuggestionsContainer">
 
-                        {matchingTitles.length === 0 ? (
+                        {matchingDocuments.length === 0 ? (
 
                             <h1 className = "HomeNavBarNoSuggestions"> No results... </h1>
 
                         ) : (
 
-                            matchingTitles.map((title, index) => {
+                            FullDocumentDictionary["Documents"].map((___, index) => {
 
-                                const finalTitle = matchingTitles[index].length > 30 ? matchingTitles[index].slice(0, 30) + "..." 
-                                    : matchingTitles[index];
+                                const finalTitle = FullDocumentDictionary["Documents"][index][1].length > 30 ? FullDocumentDictionary["Documents"][index][1].slice(0, 30) + "..." 
+                                    : FullDocumentDictionary["Documents"][index][1];
 
                                 return (
-                                    <Link to="/document" className = "HomeNavBarSuggestionPage" key={index} onClick = {() => getDocument(title)}> {finalTitle} </Link>
+
+                                    matchingDocuments.includes(index) ? (
+
+                                        <Link to="/document" className = "HomeNavBarSuggestionPage" key={index} onClick = {() => setActiveDocument(index)}> {finalTitle} </Link>
+
+                                    ) : (
+
+                                        null
+
+                                    )
+                                   
                                 )
                             })
 
